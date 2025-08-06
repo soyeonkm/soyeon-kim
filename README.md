@@ -1,26 +1,28 @@
 # Soyeon Kim - Portfolio
 
-## 🚀 Features
+## 🎨 About Me
 
-### Sections Included
+I'm a Computer Science student at the University of Michigan with a passion for software engineering, AI/ML, and creating impactful technology solutions. I specialize in building efficient, scalable applications and exploring cutting-edge technologies.
 
-1. **Hero Section**: Eye-catching introduction with animated code window
-2. **About Me**: Professional photo placeholder, bio, and statistics
-3. **Projects**: Featured projects with tech stack and links
-4. **Skills & Technologies**: Organized by category with icons
-5. **Work Experience**: Timeline layout with company details
-6. **Contact**: Contact form and social media links
-7. **Footer**: Minimalist footer with navigation
+### Current Focus Areas:
 
-### Interactive Features
+- **Software Engineering**: Full-stack development, cross-platform applications
+- **AI/ML**: Computer vision, neural networks, machine learning
+- **Research**: Mixed Reality, Human-Computer Interaction
+- **Technologies**: C++, Python, Rust, React.js, Unity, OpenCV, PyTorch
 
-- **Mobile Navigation**: Hamburger menu for mobile devices
-- **Smooth Scrolling**: Animated navigation between sections
-- **Active Navigation**: Highlights current section in navigation
-- **Contact Form**: Functional form with validation
-- **Notification System**: Success/error messages
-- **Hover Effects**: Interactive elements with smooth transitions
-- **Loading Animations**: Progressive content reveal
+### Education:
+
+- **University of Michigan, Ann Arbor** - Bachelor of Science in Computer Science, Minor in Art and Design
+- **Expected Graduation**: May 2027
+- **GPA**: 3.490
+
+### Interests:
+
+- Professional Photography (Staff Photographer at University of Michigan)
+- Competitive Jump Rope
+- Choral Singing
+- Creative Arts & Design
 
 ## 🛠️ Technologies Used
 
@@ -52,27 +54,3 @@ portfolio/
 │   └── pull_request_template.md # PR template
 └── .github/                     # GitHub specific files
 ```
-
-## 🎨 About Me
-
-I'm a Computer Science student at the University of Michigan with a passion for software engineering, AI/ML, and creating impactful technology solutions. I specialize in building efficient, scalable applications and exploring cutting-edge technologies.
-
-### Current Focus Areas:
-
-- **Software Engineering**: Full-stack development, cross-platform applications
-- **AI/ML**: Computer vision, neural networks, machine learning
-- **Research**: Mixed Reality, Human-Computer Interaction
-- **Technologies**: C++, Python, Rust, React.js, Unity, OpenCV, PyTorch
-
-### Education:
-
-- **University of Michigan, Ann Arbor** - Bachelor of Science in Computer Science, Minor in Art and Design
-- **Expected Graduation**: May 2027
-- **GPA**: 3.490
-
-### Interests:
-
-- Professional Photography (Staff Photographer at University of Michigan)
-- Competitive Jump Rope
-- Choral Singing
-- Creative Arts & Design
