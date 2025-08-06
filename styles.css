@@ -21,7 +21,7 @@
     --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
     
     /* Typography */
-    --font-primary: 'Inter', sans-serif;
+    --font-primary: 'Poppins', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     
     /* Spacing */
@@ -87,6 +87,29 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     color: var(--accent-primary);
     font-weight: 700;
+}
+
+.logo-link {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-focus-ring-color: transparent;
+}
+
+.logo-link:hover {
+    transform: scale(1.1);
+}
+
+.logo-link:focus {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-focus-ring-color: transparent;
+}
+
+.logo-link:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-menu {
@@ -175,12 +198,14 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     color: var(--accent-primary);
     font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
 .title {
     display: block;
     color: var(--text-primary);
     font-weight: 600;
+    margin-top: 0.5rem;
 }
 
 .hero-description {
