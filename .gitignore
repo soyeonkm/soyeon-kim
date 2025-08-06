@@ -95,6 +95,12 @@ typings/
 ehthumbs.db
 Thumbs.db
 
+# Large image files
+*.psd
+*.ai
+*.indd
+*.eps
+
 # Logs
 logs
 *.log
