@@ -1,4 +1,4 @@
-# Soyeon Kim - Software Engineer Portfolio
+# Soyeon Kim - Portfolio
 
 ## 🚀 Features
 
