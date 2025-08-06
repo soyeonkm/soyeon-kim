@@ -190,6 +190,32 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6;
 }
 
+.photography-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ce93ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-sm);
+    background: rgba(188, 107, 255, 0.1);
+    border: 1px solid rgba(188, 107, 255, 0.3);
+}
+
+.photography-link:hover {
+    background: rgba(188, 107, 255, 0.2);
+    border-color: #ce93ff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    color: #bb73ff;
+}
+
+.photography-link i {
+    font-size: 1.1rem;
+}
+
 .hero-buttons {
     display: flex;
     gap: 1rem;
@@ -301,6 +327,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-image {
     text-align: center;
+}
+
+.profile-photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    object-position: center; /* Centers the image for better portrait focus */
+    border-radius: 50%;
+    border: 3px solid var(--accent-primary);
+    transition: all 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-hover);
 }
 
 .image-placeholder {
