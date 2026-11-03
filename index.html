@@ -1,455 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soyeon Kim</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soyeon Kim</title>
+  <meta name="description" content="Soyeon Kim, computer science student at the University of Michigan who builds software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home" class="logo-link">
-                    <span class="logo-text">&lt;/&gt;</span>
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <!-- <li><a href="#contact" class="nav-link">Contact</a></li> -->
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+  <svg hidden>
+    <symbol id="github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+  </svg>
+
+  <main class="pages">
+    <article class="sheet front" id="front">
+      <header class="masthead">
+        <p class="ear">Vol. I &middot; No. 1</p>
+        <h1>Soyeon Kim</h1>
+        <p class="ear">Price: Free</p>
+      </header>
+
+      <div class="dateline">
+        <span data-today>Monday, November 2, 2026</span>
+        <span>Ann Arbor, Michigan</span>
+        <nav>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+
+      <div class="front-story">
+        <figure class="halftone">
+          <img src="images/headshot.jpg" alt="Soyeon Kim" fetchpriority="high">
+        </figure>
+        <div>
+          <h2>Computer science student who builds software people actually use.</h2>
+          <ul class="facts">
+            <li><span>Studying</span> Computer Science, University of Michigan</li>
+            <li><span>Building</span> AceCam Tracer at AceCam Golf</li>
+            <li><span>Editing</span> Photos for The Michigan Daily</li>
+          </ul>
         </div>
-    </nav>
+      </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="greeting">Hello, I'm</span>
-                        <span class="name">Soyeon Kim</span>
-                        <span class="title">Software Engineer</span>
-                    </h1>
-                    <p class="hero-description">
-                        I build elegant solutions to complex problems. 
-                        Passionate about software engineering, AI/ML, and professional photography. 
-                        Creating impactful technology solutions while capturing life's beautiful moments.
-                        <br><br>
-                        <a href="https://soyeonkimphotography.myportfolio.com" class="photography-link">
-                            <i class="fas fa-camera"></i> Check out my photography portfolio!
-                        </a>
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">View Projects</a>
-                        <!-- <a href="#contact" class="btn btn-secondary">Contact Me</a> -->
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="code-window">
-                        <div class="window-header">
-                            <div class="window-controls">
-                                <span class="control red"></span>
-                                <span class="control yellow"></span>
-                                <span class="control green"></span>
-                            </div>
-                            <span class="window-title">portfolio.cpp</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code>class SoftwareEngineer {
-    private:
-        std::string name;
-        std::string role;
-        std::string university;
-        std::string hometown;
-        std::string passion;
-        std::vector&lt;std::string&gt; interests;
+      <a class="turn" href="#experience">Turn the page &rarr;</a>
+    </article>
 
-    public:
-        SoftwareEngineer() {
-            name = "Soyeon Kim";
-            role = "Software Engineer, Photographer";
-            university = "University of Michigan, Ann Arbor";
-            hometown = "Los Angeles, CA";
-            passion = "Building impactful solutions";
-            interests = {"Photography", "Competitive Jumproping", 
-                        "Choral Singing"};
-        }
-};</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <article class="sheet page" id="experience">
+      <div class="folio"><span>Page 2</span><a href="#front" class="folio-name">Soyeon Kim</a><span data-today>Monday, November 2, 2026</span></div>
+      <div class="page-body"><div class="fit">
+        <h2 class="section-head">Experience</h2>
+        <ul class="entries">
+          <li>
+            <div class="entry-top"><h3>AceCam Golf</h3><span class="when">Sep 2026 &ndash; Now</span></div>
+            <p class="role">Software Engineering Intern</p>
+            <p>Built AceCam Tracer, a desktop app that cut golf-shot tracing from 18 minutes to 5.</p>
+          </li>
+          <li>
+            <div class="entry-top"><h3>Carboncopies Foundation</h3><span class="when">Jun &ndash; Oct 2025</span></div>
+            <p class="role">Software Engineering Intern</p>
+            <p>Built neural-circuit components the whole team used for brain emulation experiments.</p>
+          </li>
+          <li>
+            <div class="entry-top"><h3>Michigan Information Interaction Lab</h3><span class="when">2024 &ndash; 2025</span></div>
+            <p class="role">Research Intern</p>
+            <p>Built a mixed-reality AI system in Unity. Won a Blue Ribbon Award at the UROP Symposium.</p>
+          </li>
+        </ul>
+      </div></div>
+    </article>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="images/IMG_4106.jpg?v=1" alt="Soyeon Kim" class="profile-photo">
-                </div>
-                <div class="about-text">
-                    <h3>Who I Am</h3>
-                    <p>
-                        I'm a Computer Science student at the University of Michigan with a passion for 
-                        software engineering, AI/ML, and professional photography. 
-                    </p>
-                    <p>
-                        As a Staff Photographer for the Michigan Daily and a Photographer for V1 at Michigan, 
-                        I blend technical expertise with artistic vision. When I'm not coding, you'll find me 
-                        capturing portraits, covering live performances, or pursuing competitive jump rope and choral singing.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <span class="stat-number">3.49</span>
-                            <span class="stat-label">GPA</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">4+</span>
-                            <span class="stat-label">Exhibitions</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">31K+</span>
-                            <span class="stat-label">Photo Reach</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <article class="sheet page" id="projects">
+      <div class="folio"><span>Page 3</span><a href="#front" class="folio-name">Soyeon Kim</a><span data-today>Monday, November 2, 2026</span></div>
+      <div class="page-body"><div class="fit">
+        <h2 class="section-head">Projects</h2>
+        <div class="photo"></div>
+        <ul class="entries">
+          <li>
+            <div class="entry-top"><h3>TagIt <a class="gh" href="https://github.com/soyeonkm/TagIt" aria-label="TagIt on GitHub"><svg><use href="#github"/></svg></a></h3><span class="when">Rust &middot; Tauri &middot; React</span></div>
+            <p>Tags 100 newsroom photos in 10 minutes instead of 60. Used daily at The Michigan Daily.</p>
+          </li>
+          <li>
+            <div class="entry-top"><h3>Client Gallery <a class="gh" href="https://github.com/soyeonkm/client-gallery" aria-label="Client Gallery on GitHub"><svg><use href="#github"/></svg></a></h3><span class="when">React &middot; Express &middot; Cloudflare R2</span></div>
+            <p>Private photo galleries for clients, with auto-made web previews and one-click zip downloads.</p>
+          </li>
+          <li>
+            <div class="entry-top"><h3>FeedMe <a class="gh" href="https://github.com/soyeonkm/feedme" aria-label="FeedMe on GitHub"><svg><use href="#github"/></svg></a></h3><span class="when">React Native &middot; Node &middot; Supabase</span></div>
+            <p>Snap your pantry, get recipes ranked by what you already have.</p>
+          </li>
+          <li>
+            <div class="entry-top"><h3>Distributed Search Engine</h3><span class="when">Python &middot; MapReduce</span></div>
+            <p>MapReduce indexing across parallel workers, with PageRank-ranked search.</p>
+          </li>
+          <li>
+            <div class="entry-top"><h3>Thread Library</h3><span class="when">C++ &middot; Linux</span></div>
+            <p>User-level threads with preemption and locks, running across multiple cores.</p>
+          </li>
+          <li>
+            <div class="entry-top"><h3>Networked Filesystem</h3><span class="when">C++ &middot; Linux</span></div>
+            <p>A concurrent file server with a block cache and no races or deadlocks.</p>
+          </li>
+        </ul>
+      </div></div>
+    </article>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <i class="fas fa-database"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">SimpleQL</h3>
-                        <p class="project-description">
-                            A lightweight relational database system in C++ that supports a simplified SQL-like interface 
-                            for data storage, retrieval, and basic data manipulation. Features SELECT, DELETE, and JOIN operations.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">C++</span>
-                            <span class="tech-tag">SQL</span>
-                            <span class="tech-tag">Database</span>
-                            <span class="tech-tag">Data Structures</span>
-                        </div>
-                        <div class="project-links">
-                            <!-- <a href="https://github.com/soyeonkm" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a> -->
-                        </div>
-                    </div>
-                </div>
+    <article class="sheet page" id="contact">
+      <div class="folio"><span>Page 4</span><a href="#front" class="folio-name">Soyeon Kim</a><span data-today>Monday, November 2, 2026</span></div>
+      <div class="page-body"><div class="fit">
+        <h2 class="section-head">Contact</h2>
+        <a class="email" href="mailto:soyeonkm@umich.edu">soyeonkm@umich.edu</a>
+        <p class="elsewhere"><a href="https://github.com/soyeonkm">GitHub</a> <a href="https://www.linkedin.com/in/soyeonkm">LinkedIn</a></p>
+      </div></div>
+      <footer>&copy; 2026 Soyeon Kim &middot; Printed in Ann Arbor, Michigan</footer>
+    </article>
+  </main>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">TagIt</h3>
-                        <p class="project-description">
-                            A cross-platform desktop application using Tauri (Rust) and React.js that automated sports image 
-                            metadata tagging, combining OpenCV face recognition and custom YOLOv8 jersey number detection.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Rust</span>
-                            <span class="tech-tag">React.js</span>
-                            <span class="tech-tag">OpenCV</span>
-                            <span class="tech-tag">YOLOv8</span>
-                        </div>
-                        <div class="project-links">
-                            <!-- <a href="https://github.com/soyeonkm" class="project-link"><i class="fab fa-github"></i> Code</a> -->
-                            <!-- <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <div class="project-placeholder">
-                            <i class="fas fa-vr-cardboard"></i>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Mixed Reality AI Workspace</h3>
-                        <p class="project-description">
-                            Designed a Mixed Reality (MR) collaborative workspace featuring AI avatars powered by OpenAI API 
-                            that dynamically adapt to user position and spatial context for seamless interaction.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Unity</span>
-                            <span class="tech-tag">OpenAI API</span>
-                            <span class="tech-tag">Mixed Reality</span>
-                            <span class="tech-tag">C#</span>
-                        </div>
-                        <div class="project-links">
-                            <!-- <a href="https://github.com/soyeonkm" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fas fa-code"></i>
-                            <span>C++</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-js"></i>
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-rust"></i>
-                            <span>Rust</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-java"></i>
-                            <span>Java</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Frameworks & Tools</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-react"></i>
-                            <span>React.js</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-node-js"></i>
-                            <span>Node.js</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>Django</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-gamepad"></i>
-                            <span>Unity</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-brain"></i>
-                            <span>PyTorch</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>AI/ML & Others</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fas fa-robot"></i>
-                            <span>OpenAI API</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-eye"></i>
-                            <span>OpenCV</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-camera"></i>
-                            <span>YOLO</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-code-branch"></i>
-                            <span>Tauri</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3>Software Engineering Intern</h3>
-                            <span class="company">Carboncopies Foundation</span>
-                            <span class="period">Jun. 2025 - Present</span>
-                        </div>
-                        <p>
-                            Optimized neural circuit design for XOR gate implementation using BrainGenix' API and Neural Emulation System, 
-                            achieving approximately 120% efficiency improvement by reducing circuit complexity from 11 to 5 axons.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">BrainGenix</span>
-                            <span class="tech-tag">Neural Emulation</span>
-                            <span class="tech-tag">NetMorph</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3>Software Engineer</h3>
-                            <span class="company">V1 at Michigan</span>
-                            <span class="period">Jan. 2025 - Present</span>
-                        </div>
-                        <p>
-                            Developed a cross-platform desktop application using Tauri (Rust) and React.js that automated sports image 
-                            metadata tagging, combining OpenCV face recognition and custom YOLOv8 jersey number detection model.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">Rust</span>
-                            <span class="tech-tag">React.js</span>
-                            <span class="tech-tag">OpenCV</span>
-                            <span class="tech-tag">YOLOv8</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-header">
-                            <h3>Undergraduate Research Intern</h3>
-                            <span class="company">Michigan Information Interaction Lab</span>
-                            <span class="period">Sep. 2024 - May 2025</span>
-                        </div>
-                        <p>
-                            Designed a Mixed Reality (MR) collaborative workspace featuring AI avatars powered by OpenAI API 
-                            that dynamically adapt to user position and spatial context for seamless interaction.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">Unity</span>
-                            <span class="tech-tag">OpenAI API</span>
-                            <span class="tech-tag">Mixed Reality</span>
-                            <span class="tech-tag">C#</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section (Disabled for now) -->
-    <!--
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Let's Connect</h3>
-                    <p>
-                        I'm always interested in new opportunities and exciting projects. 
-                        Feel free to reach out if you'd like to collaborate or just say hello!
-                    </p>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <span>soyeonkm@umich.edu</span>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fas fa-phone"></i>
-                            <span>(818) 319-7165</span>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Ann Arbor, MI</span>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://github.com/soyeonkm" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/soyeonkm" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://soyeonkimphotography.myportfolio.com" class="social-link"><i class="fas fa-camera"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-text">
-                    <p>&copy; 2025 Soyeon Kim. All rights reserved.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#projects">Projects</a>
-                    <!-- <a href="#contact">Contact</a> -->
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+  <script>
+    const today = new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+    document.querySelectorAll("[data-today]").forEach(el => el.textContent = today);
+  </script>
+  <script src="pages.js"></script>
 </body>
-</html> 
+</html>
