@@ -6,13 +6,6 @@
   const box = document.querySelector(".weather");
   if (!box) return;
 
-  // The box grows with the city name; if it would then touch the nameplate or tagline, hide it
-  const masthead = [...document.querySelectorAll(".nameplate, .tagline")];
-  const textLeft = el => { const r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect().left; }; // the words, not the full-width block
-  const fit = () => box.classList.toggle("cramped", masthead.some(el => box.getBoundingClientRect().right + 16 > textLeft(el)));
-  fit(); // the empty frame is drawn from the first paint, so size it from the first paint too
-  addEventListener("resize", fit);
-
   const words = {
     0: "Clear", 1: "Mostly clear", 2: "Partly cloudy", 3: "Overcast", 45: "Fog", 48: "Freezing fog",
     51: "Light drizzle", 53: "Drizzle", 55: "Heavy drizzle", 56: "Freezing drizzle", 57: "Freezing drizzle",
@@ -40,7 +33,7 @@
     box.querySelector(".temps").textContent = `High ${deg(w.daily.temperature_2m_max[0])} · Low ${deg(w.daily.temperature_2m_min[0])}`;
     box.classList.remove("loading");
     shown = true;
-    fit();
+    fitEars(); // the box may have grown with the city name
   }
 
   // Rough first, precise after: the IP answer is instant, the browser's can take a while
