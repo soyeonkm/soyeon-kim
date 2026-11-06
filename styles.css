@@ -239,7 +239,7 @@ footer {
   :root { --bar: 3rem; }
   .wordmark { font-size: 1rem; letter-spacing: 0.08em; }
   .bar nav { gap: 0.8rem; font-size: 0.65rem; letter-spacing: 0.06em; }
-  .ears span:nth-child(2) { display: none; }
+  .masthead .ears:last-child span:nth-child(2) { display: none; }
   .kicker span:nth-child(3) { display: none; }
   .front-story { grid-template-columns: 1fr; align-content: safe center; gap: 2.5svh; }
   .headshot { order: -1; width: 22svh; justify-self: center; }
