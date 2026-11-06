@@ -13,7 +13,7 @@
   --display: "Playfair Display", Georgia, serif;
   --nameplate: "Chomsky", "Old English Text MT", serif;
   --bar: 3.5rem;
-  --edge: 1.5rem; /* how far the worn edge comes in; everything sits inside it */
+  --edge: 2.25rem; /* how far the worn edge comes in; everything sits inside it */
   --pad: clamp(1rem, 4vw, 3rem);
 }
 
@@ -75,7 +75,8 @@ p, h1, h2, h3, figure { margin: 0; }
   align-items: center;
   gap: 1rem;
   padding: 0 var(--pad);
-  background: var(--paper);
+  background: inherit; /* the page's own grain and vignette (fixed to the window), so the bar melts into the paper */
+  border-top: 1px solid var(--ink);
   border-bottom: 3px double var(--ink);
 }
 
@@ -84,7 +85,7 @@ p, h1, h2, h3, figure { margin: 0; }
 .bar nav a { text-decoration: none; }
 .bar nav a:hover { text-decoration: underline; }
 /* Paper above the bar, so nothing scrolls past in the strip between it and the edge */
-.bar::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: var(--edge); background: var(--paper); }
+.bar::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: var(--edge); background: inherit; }
 
 /* Every page is exactly one screen under the bar; pages.js scales a page's contents down to fit */
 .sheet {
@@ -169,7 +170,7 @@ p, h1, h2, h3, figure { margin: 0; }
 .facts li:last-child { border-bottom: 1px dotted var(--rule); }
 .facts span { color: var(--faded); }
 
-.headshot { width: min(40cqi, 45svh); position: relative; }
+.headshot { width: min(40cqi, 41svh); position: relative; }
 
 /* Halftone dots over the photo, like a printed plate */
 .headshot::after {
