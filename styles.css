@@ -37,7 +37,7 @@ a { color: inherit; }
 p, h1, h2, h3, figure { margin: 0; }
 
 /* Small-caps labels: the newspaper furniture */
-.bar nav, .kicker, .ears, .when, .turn, .facts span, footer, .elsewhere, figcaption {
+.bar nav, .kicker, .ears, .when, .facts span, footer, .elsewhere, figcaption {
   font: 700 0.75rem/1.2 var(--serif);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -107,7 +107,7 @@ p, h1, h2, h3, figure { margin: 0; }
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(1.5rem, 5cqi, 5rem);
-  padding-top: clamp(0.75rem, 2svh, 1.5rem);
+  padding-top: clamp(1.5rem, 4svh, 3rem);
 }
 
 .front h1 {
@@ -171,8 +171,6 @@ p, h1, h2, h3, figure { margin: 0; }
 
 figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter-spacing: 0.08em; }
 
-.turn { align-self: flex-end; text-decoration: none; padding-top: 0.75rem; font-style: italic; text-transform: none; letter-spacing: 0; font-size: 0.9rem; }
-.turn:hover { text-decoration: underline; }
 
 /* Inside pages */
 
