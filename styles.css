@@ -13,15 +13,17 @@
   --display: "Playfair Display", Georgia, serif;
   --nameplate: "Chomsky", "Old English Text MT", serif;
   --bar: 3.5rem;
+  --edge: 1.5rem; /* how far the worn edge comes in; everything sits inside it */
   --pad: clamp(1rem, 4vw, 3rem);
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: var(--bar); }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--bar) + var(--edge)); }
 
 body {
   margin: 0;
+  padding: var(--edge);
   color: var(--ink);
   font: 400 1.2rem/1.45 var(--serif);
   /* Aged newsprint: warm paper, darker toward the edges, with a faint grain */
@@ -65,7 +67,7 @@ p, h1, h2, h3, figure { margin: 0; }
 /* One bar across the top of the whole paper */
 .bar {
   position: sticky;
-  top: 0;
+  top: var(--edge);
   z-index: 1;
   height: var(--bar);
   display: grid;
@@ -81,10 +83,12 @@ p, h1, h2, h3, figure { margin: 0; }
 .bar nav { display: flex; gap: 1.5rem; justify-self: end; }
 .bar nav a { text-decoration: none; }
 .bar nav a:hover { text-decoration: underline; }
+/* Paper above the bar, so nothing scrolls past in the strip between it and the edge */
+.bar::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100%; height: var(--edge); background: var(--paper); }
 
 /* Every page is exactly one screen under the bar; pages.js scales a page's contents down to fit */
 .sheet {
-  height: calc(100svh - var(--bar));
+  height: calc(100svh - var(--bar) - 2 * var(--edge));
   display: flex;
   flex-direction: column;
   overflow: hidden;
