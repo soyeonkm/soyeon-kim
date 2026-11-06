@@ -7,7 +7,7 @@
   <meta name="description" content="Soyeon Kim, computer science student at the University of Michigan who builds software.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=UnifrakturCook:wght@700&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,34 +25,16 @@
     </nav>
   </header>
 
-  <aside class="rail" aria-label="Photography">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </aside>
-
   <main class="pages">
     <article class="sheet front" id="front">
+      <div class="masthead">
+        <p class="ears"><span>Vol. I &middot; No. 1</span><span data-today>Monday, November 2, 2026</span><span>Price: Free</span></p>
+        <p class="nameplate">Soyeon Kim</p>
+        <p class="ears"><span>Ann Arbor, Michigan</span><span>Computer Science &middot; University of Michigan</span><span>Est. 2026</span></p>
+      </div>
+
       <div class="front-story">
         <div>
-          <p class="kicker">Ann Arbor, Michigan</p>
           <h1>Hi, I&rsquo;m Soyeon.</h1>
           <p class="deck">I study computer science and build software people actually use.</p>
           <ul class="facts">
@@ -61,7 +43,7 @@
             <li><span>Editing</span> Photos for The Michigan Daily</li>
           </ul>
         </div>
-        <figure class="headshot"><img src="images/headshot.jpg" alt="Soyeon Kim" fetchpriority="high"></figure>
+        <figure class="headshot"><img src="images/headshot.jpg" alt="Soyeon Kim" fetchpriority="high"><figcaption>The author, pictured in Ann Arbor.</figcaption></figure>
       </div>
 
       <a class="turn" href="#experience">Continued on Page 2 &darr;</a>
@@ -69,7 +51,7 @@
 
     <article class="sheet page" id="experience">
       <div class="page-body"><div class="fit">
-        <p class="kicker">Page 2</p>
+        <p class="kicker"><span>Page 2</span><span>Experience</span><span>Soyeon Kim</span></p>
         <h2 class="section-head">Experience</h2>
         <ul class="entries">
           <li>
@@ -93,10 +75,9 @@
 
     <article class="sheet page" id="projects">
       <div class="page-body"><div class="fit">
-        <p class="kicker">Page 3</p>
+        <p class="kicker"><span>Page 3</span><span>Projects</span><span>Soyeon Kim</span></p>
         <h2 class="section-head">Projects</h2>
-        <div class="photo"></div>
-        <ul class="entries">
+        <ul class="entries columns">
           <li>
             <div class="entry-top"><h3>TagIt <a class="gh" href="https://github.com/soyeonkm/TagIt" aria-label="TagIt on GitHub"><svg><use href="#github"/></svg></a></h3><span class="when">Rust &middot; Tauri &middot; React</span></div>
             <p>Tags 100 newsroom photos in 10 minutes instead of 60. Used daily at The Michigan Daily.</p>
@@ -127,37 +108,15 @@
 
     <article class="sheet page" id="contact">
       <div class="page-body"><div class="fit">
-        <p class="kicker">Page 4</p>
-        <h2 class="section-head">Contact</h2>
+        <p class="kicker"><span>Page 4</span><span>Contact</span><span>Soyeon Kim</span></p>
+        <h2 class="section-head">Correspondence</h2>
+        <p class="notice">Letters to the editor may be addressed to</p>
         <a class="email" href="mailto:soyeonkm@umich.edu">soyeonkm@umich.edu</a>
         <p class="elsewhere"><a href="https://github.com/soyeonkm">GitHub</a> <a href="https://www.linkedin.com/in/soyeonkm">LinkedIn</a> <a href="https://soyeonkimphotography.myportfolio.com/">Photography</a></p>
       </div></div>
       <footer>&copy; 2026 Soyeon Kim &middot; Printed in Ann Arbor, Michigan</footer>
     </article>
   </main>
-
-  <aside class="rail" aria-label="Photography">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </aside>
 
   <script>
     const today = new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
