@@ -31,6 +31,21 @@
   const edge = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--edge"));
   addEventListener("scroll", () => menu.classList.toggle("stuck", menu.getBoundingClientRect().top <= edge * 16 + 1), { passive: true });
 
+  // The ears hide themselves if they would touch the nameplate or tagline text (the words, not the full-width block)
+  const masthead = [...document.querySelectorAll(".nameplate, .tagline")];
+  const textBox = el => { const r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect(); };
+  window.fitEars = () => {
+    const weather = document.querySelector(".weather"), briefing = document.querySelector(".briefing");
+    if (weather && briefing) { briefing.style.height = weather.offsetHeight + "px"; briefing.style.width = weather.offsetWidth + "px"; } // the two ears match
+    const texts = masthead.map(textBox);
+    for (const ear of document.querySelectorAll(".ear")) {
+      const b = ear.getBoundingClientRect();
+      ear.classList.toggle("cramped", texts.some(t => b.right + 16 > t.left && b.left - 16 < t.right));
+    }
+  };
+  fitEars();
+  addEventListener("resize", fitEars);
+
   let fitTimer;
   addEventListener("resize", () => {
     clearTimeout(fitTimer);
