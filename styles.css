@@ -5,7 +5,6 @@
   --rule: #a3957c;
   --serif: "Old Standard TT", "Times New Roman", serif;
   --display: "Playfair Display", Georgia, serif;
-  --black: "UnifrakturCook", "Old English Text MT", serif;
   --bar: 3.5rem;
   --pad: clamp(1rem, 4vw, 3rem);
 }
@@ -31,7 +30,7 @@ a { color: inherit; }
 p, h1, h2, h3, figure { margin: 0; }
 
 /* Small-caps labels: the newspaper furniture */
-.bar nav, .bar-date, .kicker, .ears, .when, .turn, .facts span, footer, .elsewhere, figcaption {
+.bar nav, .kicker, .ears, .when, .turn, .facts span, footer, .elsewhere, figcaption {
   font: 700 0.75rem/1.2 var(--serif);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -44,7 +43,7 @@ p, h1, h2, h3, figure { margin: 0; }
   z-index: 1;
   height: var(--bar);
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 1rem;
   padding: 0 var(--pad);
@@ -52,8 +51,7 @@ p, h1, h2, h3, figure { margin: 0; }
   border-bottom: 3px double var(--ink);
 }
 
-.wordmark { font: 700 1.5rem/1 var(--black); text-decoration: none; }
-.bar-date { color: var(--faded); }
+.wordmark { font: 900 1.25rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; }
 .bar nav { display: flex; gap: 1.5rem; justify-self: end; }
 .bar nav a { text-decoration: none; }
 .bar nav a:hover { text-decoration: underline; }
@@ -86,8 +84,10 @@ p, h1, h2, h3, figure { margin: 0; }
 .masthead { text-align: center; }
 
 .nameplate {
-  font: 700 clamp(3rem, min(9cqi, 11svh), 6.5rem)/1.1 var(--black);
-  padding: 0.1em 0 0.05em;
+  font: 900 clamp(2.5rem, min(7.5cqi, 10svh), 5.5rem)/1.2 var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.05em 0 0;
   border-bottom: 4px solid var(--ink);
   margin-bottom: 2px;
 }
@@ -226,9 +226,7 @@ footer {
 
 @media (max-width: 720px) {
   :root { --bar: 3rem; }
-  .bar { grid-template-columns: auto 1fr; }
-  .bar-date { display: none; }
-  .wordmark { font-size: 1.25rem; }
+  .wordmark { font-size: 1rem; letter-spacing: 0.08em; }
   .bar nav { gap: 0.8rem; font-size: 0.65rem; letter-spacing: 0.06em; }
   .ears span:nth-child(2) { display: none; }
   .kicker span:nth-child(3) { display: none; }
