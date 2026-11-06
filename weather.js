@@ -1,6 +1,7 @@
-// The weather ear: today's forecast for wherever the reader is. Location comes from their IP
-// (no permission prompt), the forecast from Open-Meteo. Both are free and keyless. If either
-// fails, the box simply stays hidden.
+// The weather ear: today's forecast for wherever the reader is. The browser's own location
+// (GPS/Wi-Fi, after the permission prompt) names the town precisely; if that's refused or
+// unavailable, their IP gives a rougher fix. The forecast comes from Open-Meteo. Everything
+// is free and keyless, and if it all fails the box simply stays hidden.
 (async () => {
   const box = document.querySelector(".weather");
   if (!box) return;
@@ -13,7 +14,7 @@
     95: "Thunderstorm", 96: "Thunderstorm, hail", 99: "Thunderstorm, hail",
   };
   try {
-    const where = await (await fetch("https://get.geojs.io/v1/ip/geo.json")).json();
+    const where = await locate();
     const fahrenheit = where.country_code === "US";
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${where.latitude}&longitude=${where.longitude}` +
       `&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&forecast_days=1&timezone=auto` +
@@ -25,4 +26,15 @@
     box.querySelector(".temps").textContent = `High ${deg(w.daily.temperature_2m_max[0])} · Low ${deg(w.daily.temperature_2m_min[0])}`;
     box.hidden = false;
   } catch {} // no weather is better than a broken box
+
+  async function locate() {
+    try {
+      const { coords } = await new Promise((ok, no) =>
+        navigator.geolocation.getCurrentPosition(ok, no, { timeout: 8000, maximumAge: 600000 }));
+      const p = await (await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coords.latitude}&longitude=${coords.longitude}&localityLanguage=en`)).json();
+      return { latitude: coords.latitude, longitude: coords.longitude, city: (p.city || p.locality || "").replace(/^(City|Town|Village|Township) of /, ""), region: p.principalSubdivision, country: p.countryName, country_code: p.countryCode };
+    } catch {
+      return (await fetch("https://get.geojs.io/v1/ip/geo.json")).json(); // declined or unsupported: city from the IP instead
+    }
+  }
 })();
