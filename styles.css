@@ -5,7 +5,7 @@
   --rule: #a3957c;
   --serif: "Old Standard TT", "Times New Roman", serif;
   --display: "Playfair Display", Georgia, serif;
-  --nameplate: "Pirata One", "Old English Text MT", serif;
+  --nameplate: "Texturina", "Old English Text MT", serif;
   --bar: 3.5rem;
   --pad: clamp(1rem, 4vw, 3rem);
 }
@@ -52,7 +52,7 @@ p, h1, h2, h3, figure { margin: 0; }
   border-bottom: 3px double var(--ink);
 }
 
-.wordmark { font: 400 1.875rem/1 var(--nameplate); text-decoration: none; }
+.wordmark { font: 700 1.625rem/1 var(--nameplate); text-decoration: none; }
 .bar nav { display: flex; gap: 1.5rem; justify-self: end; }
 .bar nav a { text-decoration: none; }
 .bar nav a:hover { text-decoration: underline; }
@@ -85,9 +85,9 @@ p, h1, h2, h3, figure { margin: 0; }
 .masthead { text-align: center; }
 
 .nameplate {
-  font: 400 clamp(3.5rem, min(11cqi, 13svh), 8rem)/1.05 var(--nameplate);
+  font: 700 clamp(3.25rem, min(10cqi, 12svh), 7.5rem)/1.1 var(--nameplate);
   letter-spacing: 0.02em;
-  padding: 0.05em 0 0;
+  padding: 0.05em 0 0.12em;
   border-bottom: 4px solid var(--ink);
   margin-bottom: 2px;
 }
