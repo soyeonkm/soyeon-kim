@@ -1,13 +1,14 @@
 :root {
-  --paper: #faf9f6;
-  --ink: #111;
-  --faded: #6b6b6b;
-  --rule: #d8d5ce;
+  --paper: #0a0a0a;
+  --ink: #ececec;
+  --faded: #8a8a8a;
+  --rule: #2a2a2a;
+  --film: #1a1a1a;
+  --mono: ui-monospace, "SF Mono", Menlo, monospace;
   --serif: "Newsreader", Georgia, serif;
   --sans: "Inter Tight", system-ui, sans-serif;
   --bar: 3.5rem;
   --pad: clamp(1rem, 4vw, 3rem);
-  --rail: clamp(11rem, 14vw, 17rem);
 }
 
 * { box-sizing: border-box; }
@@ -44,7 +45,7 @@ p, h1, h2, h3, figure { margin: 0; }
   gap: 1rem;
   padding: 0 var(--pad);
   background: var(--paper);
-  border-bottom: 3px double var(--ink);
+  border-bottom: 1px solid var(--rule);
 }
 
 .wordmark { font: 700 1.375rem/1 var(--serif); letter-spacing: -0.01em; text-decoration: none; }
@@ -103,7 +104,7 @@ p, h1, h2, h3, figure { margin: 0; }
 .facts li:last-child { border-bottom: 1px solid var(--rule); }
 .facts span { color: var(--faded); }
 
-.headshot { width: min(38cqi, 56svh); aspect-ratio: 4 / 5; }
+.headshot { width: min(38cqi, 46svh); aspect-ratio: 4 / 5; }
 
 .headshot img {
   display: block;
@@ -118,17 +119,67 @@ p, h1, h2, h3, figure { margin: 0; }
 
 /* Inside pages */
 
-.page-body { flex: 1; min-height: 0; width: 100%; max-width: 64rem; margin: 0 auto; overflow: hidden; }
-.fit { padding-bottom: 1rem; }
+.page { padding-inline: 0; } /* the rolls run edge to edge; everything else keeps the margins */
+.page-body { flex: 1; min-height: 0; width: 100%; overflow: hidden; }
+.fit { min-height: 100%; display: flex; flex-direction: column; padding-bottom: 1rem; }
+.fit > :not(.roll), .page footer { width: min(100% - 2 * var(--pad), 64rem); margin-inline: auto; }
 
 .section-head {
   font: 700 clamp(2.75rem, min(8cqi, 11svh), 5rem)/1 var(--serif);
   letter-spacing: -0.03em;
-  margin: 0.5rem 0 0.75rem;
+  margin-block: 0.5rem clamp(1.5rem, 5svh, 3rem);
 }
 
-.entries { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-.entries li { padding: 1.25rem 0; border-bottom: 1px solid var(--rule); }
+/* One roll of film per section, edge to edge, one frame per entry. pages.js rolls it along. */
+.roll {
+  --g: 1.6rem; /* sprocket gutter above and below the frames */
+  --holes: repeating-linear-gradient(90deg, transparent 0 0.4rem, var(--paper) 0 1.1rem, transparent 0 1.5rem);
+  display: flex;
+  gap: 0.6rem;
+  list-style: none;
+  margin: auto 0; /* centered in the space under the heading */
+  padding: var(--g) 0.6rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  counter-reset: frame;
+  cursor: grab;
+  background:
+    var(--holes) 0 0.5rem / 100% 0.55rem repeat-x local,
+    var(--holes) 0 calc(100% - 0.5rem) / 100% 0.55rem repeat-x local,
+    var(--film);
+}
+
+.roll.dragging { cursor: grabbing; user-select: none; }
+
+.roll > li {
+  position: relative;
+  flex: none;
+  width: min(26rem, 78cqi);
+  aspect-ratio: 3 / 2; /* at least a 35mm frame; grows if the words need more room */
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem;
+  background: #262626;
+  counter-increment: frame;
+}
+
+/* Each frame a slightly different exposure: cool greys and warm brown-greys */
+.roll > [data-shade="1"] { background: #2b2825; }
+.roll > [data-shade="2"] { background: #222; }
+.roll > [data-shade="3"] { background: #2e2b28; }
+.roll > [data-shade="4"] { background: #292929; }
+.roll > [data-shade="5"] { background: #25221f; }
+
+/* Frame numbers in the bottom gutter, like the edge printing on a negative */
+.roll > li::after {
+  content: counter(frame) " \25B8";
+  position: absolute;
+  left: 0.25rem;
+  top: calc(100% + 0.15rem);
+  font: 600 0.55rem/1 var(--mono);
+  letter-spacing: 0.1em;
+  color: #555;
+}
 
 .entry-top {
   display: flex;
@@ -138,39 +189,22 @@ p, h1, h2, h3, figure { margin: 0; }
   gap: 0.25rem 1rem;
 }
 
-.entries h3 { font: 600 clamp(1.5rem, 3.2cqi, 2rem)/1.15 var(--serif); letter-spacing: -0.01em; }
+.roll h3 { font: 600 clamp(1.5rem, 3.2cqi, 2rem)/1.15 var(--serif); letter-spacing: -0.01em; }
 
 .gh { display: inline-flex; vertical-align: 0.05em; margin-left: 0.3em; color: var(--faded); }
 .gh:hover { color: var(--ink); }
 .gh svg { width: 0.7em; height: 0.7em; }
 .when { color: var(--faded); }
 .role { font-style: italic; color: var(--faded); margin: 0.15rem 0 0.4rem; }
-.entries li > p:last-child { margin-top: 0.4rem; }
+.roll li > p:last-child { margin-top: 0.75rem; }
 
-/* Projects: two short columns of entries on wider screens so the page fits one screen */
-@media (min-width: 800px) {
-  #projects .entries { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; }
-}
-
-/* Grey stand-in until a real photo is picked */
-.photo { background: #d4d1ca; height: clamp(3rem, 14svh, 10rem); margin-bottom: 1rem; }
-
-@media (max-height: 500px) {
-  .photo { display: none; }
-}
-
-.email {
-  display: inline-block;
-  margin-top: 1.5rem;
-  font: 600 clamp(1.75rem, 6cqi, 3.5rem)/1.1 var(--serif);
-  letter-spacing: -0.02em;
-  text-decoration-thickness: 1px;
+.big {
+  margin-top: auto;
+  font: 600 clamp(1.125rem, 5.5cqi, 2rem)/1.15 var(--serif);
   text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
   overflow-wrap: anywhere;
 }
-
-.elsewhere { display: flex; gap: 1.5rem; margin-top: 1.25rem; }
-.elsewhere a { text-underline-offset: 0.2em; }
 
 footer {
   margin-top: 1rem;
@@ -179,40 +213,6 @@ footer {
   text-align: center;
   color: var(--faded);
 }
-
-/* Photo gallery down both side margins, on screens wide enough to spare them */
-.rail { display: none; }
-
-@media (min-width: 1200px) {
-  /* The front page spans the full width; the gallery runs beside the inside pages only */
-  body { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr) var(--rail); }
-  .pages { display: contents; }
-  .bar, .front { grid-column: 1 / -1; }
-  #experience { grid-area: 3 / 2; }
-  #projects { grid-area: 4 / 2; }
-  #contact { grid-area: 5 / 2; }
-  .rail { grid-row: 3 / 6; }
-  .rail {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    contain: size; /* as tall as the pages, never taller */
-    overflow: hidden;
-    padding: 2rem 1.5rem 0 var(--pad);
-    border-right: 1px solid var(--rule);
-  }
-  main ~ .rail { grid-column: 3; padding: 7rem var(--pad) 0 1.5rem; border: 0; border-left: 1px solid var(--rule); }
-}
-
-/* Grey stand-ins in mixed shades and shapes until real photos go in */
-.rail > * { flex: none; aspect-ratio: 4 / 5; background: #cfccc5; }
-.rail > :nth-child(3n + 2) { aspect-ratio: 1; }
-.rail > :nth-child(3n) { aspect-ratio: 3 / 4; }
-.rail > :nth-child(4n + 1) { aspect-ratio: 2 / 3; }
-.rail > :nth-child(5n + 2) { background: #b8b4ab; }
-.rail > :nth-child(5n + 3) { background: #e0ddd6; }
-.rail > :nth-child(5n + 4) { background: #9f9b93; }
-.rail > :nth-child(5n) { background: #c4c0b8; }
 
 /* Narrow screens */
 
@@ -223,7 +223,7 @@ footer {
   .wordmark { font-size: 1.125rem; }
   .bar nav { gap: 0.9rem; font-size: 0.6875rem; letter-spacing: 0.05em; }
   .front-story { grid-template-columns: 1fr; align-content: safe center; gap: 3svh; }
-  .headshot { order: -1; width: 24svh; }
+  .headshot { order: -1; width: 20svh; }
   .front h1 { font-size: clamp(2.75rem, min(16cqi, 9svh), 4.5rem); }
   .deck { font-size: clamp(1.125rem, min(5cqi, 3.2svh), 1.375rem); margin-top: 2svh; }
   .facts { font-size: clamp(0.9375rem, 2.4svh, 1.0625rem); margin-top: 2.5svh; }
@@ -233,7 +233,7 @@ footer {
 
 /* Short phones: smaller photo so the headline and facts keep their size */
 @media (max-width: 720px) and (max-height: 700px) {
-  .headshot { width: 16svh; }
+  .headshot { width: 14svh; }
 }
 
 /* Phones turned sideways: photo beside the headline again, sized to the short screen */
