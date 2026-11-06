@@ -137,7 +137,18 @@ p, h1, h2, h3, figure { margin: 0; }
 .facts li:last-child { border-bottom: 1px dotted var(--rule); }
 .facts span { color: var(--faded); }
 
-.headshot { width: min(34cqi, 48svh); }
+.headshot { width: min(34cqi, 48svh); position: relative; }
+
+/* Halftone dots over the photo, like a printed plate */
+.headshot::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  aspect-ratio: 4 / 5;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(60, 40, 10, 0.28) 0.6px, transparent 1.1px) 0 0 / 3px 3px;
+  mix-blend-mode: multiply;
+}
 
 .headshot img {
   display: block;
@@ -145,8 +156,8 @@ p, h1, h2, h3, figure { margin: 0; }
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 50% 20%;
-  /* Printed in one ink: grey, warmed to match the paper */
-  filter: grayscale(1) sepia(0.35) contrast(1.15) brightness(1.02);
+  /* Muted colour, warmed to match the paper */
+  filter: saturate(0.8) contrast(1.05);
   mix-blend-mode: multiply;
   border: 1px solid var(--ink);
   padding: 3px;
