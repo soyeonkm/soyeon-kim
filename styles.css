@@ -65,7 +65,24 @@ p, h1, h2, h3, figure { margin: 0; }
 }
 
 /* One bar across the top of the whole paper */
-.bar { padding: 0 var(--pad); text-align: center; }
+.bar { position: relative; padding: 0 var(--pad); text-align: center; }
+
+/* The weather ear: a small ruled box beside the nameplate, like the ears on an old front page */
+.weather {
+  position: absolute;
+  left: var(--pad);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ink);
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+.weather .label { font: 700 0.7rem/1.2 var(--serif); text-transform: uppercase; letter-spacing: 0.14em; color: var(--faded); border-bottom: 1px solid var(--rule); padding-bottom: 0.3rem; margin-bottom: 0.35rem; }
+.weather .place { font-weight: 700; }
+.weather .temps { color: var(--faded); font-size: 0.8rem; }
 
 .tagline { font-style: italic; color: var(--faded); margin-top: 0.1em; }
 /* Only the nav sticks; the nameplate scrolls away above it */
@@ -267,6 +284,7 @@ footer {
 
 @media (max-width: 720px) {
   :root { --bar: 3rem; }
+  .weather { position: static; transform: none; width: auto; margin: 0.75rem auto 0; display: inline-block; }
   .menu { gap: 1rem; }
   .tagline { font-size: 1rem; }
   .kicker span:nth-child(3) { display: none; }
