@@ -22,6 +22,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--bar) + var(--edge)); }
 
 body {
+  position: relative; /* the worn edge is drawn round the whole page, not the window */
   margin: 0;
   padding: var(--edge);
   color: var(--ink);
@@ -45,9 +46,9 @@ p, h1, h2, h3, figure { margin: 0; }
   letter-spacing: 0.14em;
 }
 
-/* The site is one sheet: a darkened, worn edge all the way round the window, over everything */
+/* The site is one sheet: a darkened, worn edge all the way round the page, over everything; it scrolls with the paper */
 .edge {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
