@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=14">
+  <link rel="stylesheet" href="styles.css?v=31">
 </head>
 <body>
   <svg style="display: none">
@@ -18,10 +18,25 @@
   <!-- Worn paper edge around the whole site; the filter roughens the inner rule so it isn't ruler-straight -->
   <svg width="0" height="0" style="position: absolute" aria-hidden="true">
     <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="3" seed="7"/><feDisplacementMap in="SourceGraphic" scale="7"/></filter>
+    <!-- Weather icons: pen-drawn outlines -->
+    <symbol id="wx-cloud" viewBox="0 0 32 32"><path d="M10 24h13a5 5 0 0 0 .5-10A7 7 0 0 0 10 13.5 5.3 5.3 0 0 0 10 24z"/></symbol>
+    <symbol id="wx-sun" viewBox="0 0 32 32"><circle cx="16" cy="16" r="5.5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.8 6.8l2.8 2.8M22.4 22.4l2.8 2.8M6.8 25.2l2.8-2.8M22.4 9.6l2.8-2.8"/></symbol>
+    <symbol id="wx-partly" viewBox="0 0 32 32"><circle cx="11" cy="11" r="4.5"/><path d="M11 2v3M2 11h3M4.6 4.6l2.2 2.2M17.4 4.6l-2.2 2.2M4.6 17.4l2.2-2.2"/><path d="M13 27h12a4.5 4.5 0 0 0 .4-9A6.3 6.3 0 0 0 13 17.5a4.8 4.8 0 0 0 0 9.5z"/></symbol>
+    <symbol id="wx-fog" viewBox="0 0 32 32"><path d="M10 19h13a5 5 0 0 0 .5-10A7 7 0 0 0 10 8.5 5.3 5.3 0 0 0 10 19z"/><path d="M7 24h18M10 28h12"/></symbol>
+    <symbol id="wx-rain" viewBox="0 0 32 32"><path d="M10 19h13a5 5 0 0 0 .5-10A7 7 0 0 0 10 8.5 5.3 5.3 0 0 0 10 19z"/><path d="M12 23l-2 5M17 23l-2 5M22 23l-2 5"/></symbol>
+    <symbol id="wx-snow" viewBox="0 0 32 32"><path d="M10 18h13a5 5 0 0 0 .5-10A7 7 0 0 0 10 7.5 5.3 5.3 0 0 0 10 18z"/><path d="M11 23l3 3M14 23l-3 3M15.5 25l3 3M18.5 25l-3 3M20 22l3 3M23 22l-3 3"/></symbol>
+    <symbol id="wx-storm" viewBox="0 0 32 32"><path d="M10 18h13a5 5 0 0 0 .5-10A7 7 0 0 0 10 7.5 5.3 5.3 0 0 0 10 18z"/><path d="M17 19l-3 6h4l-3 6"/></symbol>
   </svg>
   <div class="edge"></div>
 
   <header class="bar">
+    <aside class="weather loading">
+      <p class="label">Weather Report</p>
+      <svg class="icon" aria-hidden="true"><use href="#wx-cloud"/></svg>
+      <p class="cond"></p>
+      <p class="place"><span class="city">&nbsp;</span><span class="now"></span></p>
+      <p class="temps">&nbsp;</p>
+    </aside>
     <a href="#front" class="nameplate">Soyeon Kim</a>
     <p class="tagline">Ann Arbor, Michigan &middot; <span data-today>Monday, November 2, 2026</span></p>
   </header>
@@ -122,6 +137,7 @@
     const today = new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
     document.querySelectorAll("[data-today]").forEach(el => el.textContent = today);
   </script>
-  <script src="pages.js?v=4"></script>
+  <script src="pages.js?v=5"></script>
+  <script src="weather.js?v=14"></script>
 </body>
 </html>

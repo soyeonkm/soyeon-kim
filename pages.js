@@ -26,6 +26,11 @@
     for (const body of bodies) body.firstElementChild.style.zoom = zoom;
   }
 
+  // The nav carries a paper cap only once it's stuck, so at rest nothing covers the tagline above it
+  const menu = document.querySelector(".menu");
+  const edge = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--edge"));
+  addEventListener("scroll", () => menu.classList.toggle("stuck", menu.getBoundingClientRect().top <= edge * 16 + 1), { passive: true });
+
   let fitTimer;
   addEventListener("resize", () => {
     clearTimeout(fitTimer);
