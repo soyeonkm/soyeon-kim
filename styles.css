@@ -106,8 +106,11 @@ p, h1, h2, h3, figure { margin: 0; }
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: clamp(1.5rem, 5cqi, 5rem);
-  padding-top: clamp(1.5rem, 4svh, 3rem);
+  gap: clamp(1.5rem, 3cqi, 3rem);
+  padding-top: clamp(1rem, 3svh, 2rem);
+  max-width: 78rem;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .front h1 {
@@ -117,9 +120,9 @@ p, h1, h2, h3, figure { margin: 0; }
 
 .deck {
   font-size: clamp(1.2rem, min(2cqi, 3.4svh), 1.75rem);
-  line-height: 1.35;
+  line-height: 1.45;
   max-width: 24em;
-  margin-top: clamp(0.75rem, 2.5svh, 1.5rem);
+  margin-top: clamp(1rem, 3svh, 2rem);
   text-align: justify;
   hyphens: auto;
 }
@@ -133,17 +136,17 @@ p, h1, h2, h3, figure { margin: 0; }
 
 .facts {
   list-style: none;
-  margin: clamp(1rem, 3svh, 2rem) 0 0;
+  margin: clamp(1.5rem, 4svh, 2.5rem) 0 0;
   padding: 0;
   max-width: 34rem;
   font-size: clamp(1rem, min(1.5cqi, 2.5svh), 1.25rem);
 }
 
-.facts li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); align-items: baseline; border-top: 1px dotted var(--rule); padding: 0.5em 0; }
+.facts li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); align-items: baseline; border-top: 1px dotted var(--rule); padding: 0.7em 0; }
 .facts li:last-child { border-bottom: 1px dotted var(--rule); }
 .facts span { color: var(--faded); }
 
-.headshot { width: min(34cqi, 42svh); position: relative; }
+.headshot { width: min(40cqi, 45svh); position: relative; }
 
 /* Halftone dots over the photo, like a printed plate */
 .headshot::after {
