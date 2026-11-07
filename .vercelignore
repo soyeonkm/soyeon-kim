@@ -1,0 +1,6 @@
+# Kept off Vercel: secrets, the raw photo upload, and local tooling
+.env
+.env.*
+images/IMG_2690.jpg
+spotify.mjs
+config.js
