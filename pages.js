@@ -28,8 +28,8 @@
 
   // The nav carries a paper cap only once it's stuck, so at rest nothing covers the tagline above it
   const menu = document.querySelector(".menu");
-  const edge = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--edge"));
-  addEventListener("scroll", () => menu.classList.toggle("stuck", menu.getBoundingClientRect().top <= edge * 16 + 1), { passive: true });
+  const stick = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--stick"));
+  addEventListener("scroll", () => menu.classList.toggle("stuck", menu.getBoundingClientRect().top <= stick * 16 + 1), { passive: true });
 
   // The ears hide themselves if they would touch the nameplate or tagline text (the words, not the full-width block)
   const masthead = [...document.querySelectorAll(".nameplate, .tagline")];
