@@ -1,7 +1,8 @@
 // Vercel function (served at /api/now-playing): the song I'm playing on Spotify right now, or the last one I played.
 // It holds the Spotify keys (Vercel env vars SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET and
 // SPOTIFY_REFRESH_TOKEN, the last from `node spotify.mjs`) so the page never sees them.
-// Answers are cached at Vercel's edge for 10 seconds, so visitors don't each call Spotify.
+// Answers are shared at Vercel's edge for 3 seconds, so visitors don't each call Spotify, and
+// browsers never keep them.
 const skip = /^(童話|Tong ?hua)$/i; // songs never to show, by title
 let access, expires = 0;
 
@@ -36,7 +37,7 @@ const song = (t, playing) => ({
 });
 
 export async function GET() {
-  const headers = { "Access-Control-Allow-Origin": "*", "Cache-Control": "public, s-maxage=10, stale-while-revalidate=20" };
+  const headers = { "Access-Control-Allow-Origin": "*", "Cache-Control": "no-store", "Vercel-CDN-Cache-Control": "max-age=3" };
   try {
     const now = await spotify("player/currently-playing");
     if (now?.is_playing && now.item?.type === "track" && !skip.test(now.item.name)) return Response.json(song(now.item, true), { headers });

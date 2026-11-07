@@ -1,6 +1,6 @@
 // The music ear: the song I'm playing on Spotify right now, or the last one I played. It comes
 // from the site's now-playing function (api/now-playing.mjs, run by Vercel), which keeps the
-// Spotify keys, and is checked again every 20 seconds while the tab is in view. The song links
+// Spotify keys, and is checked again every 10 seconds while the tab is in view. The song links
 // to Spotify. If the function can't be reached the box is removed.
 const NOW_PLAYING = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
   ? "https://www.soyeonkm.com/api/now-playing" // a local preview has no function of its own; use the live one
@@ -14,7 +14,7 @@ const NOW_PLAYING = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
 
   async function update() {
     if (document.hidden) return;
-    const s = await (await fetch(NOW_PLAYING)).json();
+    const s = await (await fetch(NOW_PLAYING, { cache: "no-store" })).json();
     if (!s?.title) throw new Error("nothing played");
     if (s.url + s.playing === shown) return;
     const first = !shown;
@@ -30,6 +30,6 @@ const NOW_PLAYING = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
   }
 
   try { await update(); } catch { box.remove(); return; }
-  setInterval(() => update().catch(() => {}), 20000);
+  setInterval(() => update().catch(() => {}), 10000);
   document.addEventListener("visibilitychange", () => update().catch(() => {}));
 })();
