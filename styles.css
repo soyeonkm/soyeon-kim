@@ -14,12 +14,13 @@
   --nameplate: "Chomsky", "Old English Text MT", serif;
   --bar: 3.5rem;
   --edge: 2.25rem; /* how far the worn edge comes in; everything sits inside it */
+  --stick: 0.6rem; /* the sliver of paper above the nav once it's frozen at the top while scrolling */
   --pad: clamp(1rem, 4vw, 3rem);
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--bar) + var(--edge)); }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--bar) + var(--stick)); }
 
 body {
   position: relative; /* the worn edge is drawn round the whole page, not the window */
@@ -114,7 +115,7 @@ p, h1, h2, h3, figure { margin: 0; }
 /* Only the nav sticks; the nameplate scrolls away above it */
 .menu {
   position: sticky;
-  top: var(--edge);
+  top: var(--stick);
   z-index: 1;
   background: inherit; /* the page's own grain and vignette (fixed to the window), so the bar melts into the paper */
   display: flex;
@@ -128,12 +129,12 @@ p, h1, h2, h3, figure { margin: 0; }
 }
 .menu a { text-decoration: none; }
 .menu a:hover { text-decoration: underline; }
-/* While stuck (pages.js sets the class), paper above the nav so nothing scrolls past in the strip between it and the edge */
-.menu.stuck::before { content: ""; position: absolute; left: 0; right: 0; bottom: calc(100% + 1px); height: var(--edge); background: inherit; }
+/* While stuck (pages.js sets the class), paper above the nav so nothing scrolls past in the sliver between it and the top */
+.menu.stuck::before { content: ""; position: absolute; left: 0; right: 0; bottom: calc(100% + 1px); height: var(--stick); background: inherit; }
 
 /* Every page is exactly one screen under the bar; pages.js scales a page's contents down to fit */
 .sheet {
-  height: calc(100svh - var(--bar) - 2 * var(--edge));
+  height: calc(100svh - var(--stick) - var(--bar) - var(--edge));
   display: flex;
   flex-direction: column;
   overflow: hidden;
