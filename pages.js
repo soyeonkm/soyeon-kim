@@ -2,11 +2,13 @@
 // text reflows rather than shrinking like an image) just enough that the fullest page
 // fits, and uses that same scale on every page so they all match.
 (() => {
+  const setZoom = (body, z) => { body.firstElementChild.style.zoom = z; };
+
   function bestZoom(body) {
     const fit = body.firstElementChild;
     const fits = z => {
-      fit.style.zoom = z;
-      return fit.getBoundingClientRect().height <= body.getBoundingClientRect().height + 0.5;
+      setZoom(body, z);
+      return fit.getBoundingClientRect().bottom <= body.getBoundingClientRect().bottom + 0.5; // bottoms, not heights: a heading's top margin pushes the content down
     };
     if (fits(1)) return 1;
     let lo = 0.3, hi = 1; // binary search: zoom changes line wrapping, so it isn't proportional
@@ -21,9 +23,11 @@
     // The sticky nav's height sets how tall a page can be; the front page also loses the nameplate above it
     document.documentElement.style.setProperty("--bar", document.querySelector(".menu").offsetHeight + "px");
     document.documentElement.style.setProperty("--head", document.querySelector(".bar").offsetHeight + "px");
-    const bodies = [...document.querySelectorAll(".page-body")];
+    const front = document.querySelector(".front-body");
+    setZoom(front, bestZoom(front)); // the front page has its own layout, so its own scale
+    const bodies = [...document.querySelectorAll(".page-body:not(.front-body)")];
     const zoom = Math.min(...bodies.map(bestZoom));
-    for (const body of bodies) body.firstElementChild.style.zoom = zoom;
+    for (const body of bodies) setZoom(body, zoom);
   }
 
   // The nav carries a paper cap only once it's stuck, so at rest nothing covers the tagline above it
