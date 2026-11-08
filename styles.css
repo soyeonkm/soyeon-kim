@@ -299,11 +299,9 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
 .role { font-style: italic; color: var(--faded); margin: 0.1rem 0 0.35rem; }
 .entries li > p:last-child { margin-top: 0.35rem; }
 
-/* Projects: two columns with a hairline between, like a broadsheet */
-@media (min-width: 800px) {
-  .columns { columns: 2; column-gap: 3rem; column-rule: 1px solid var(--rule); }
-  .columns li { break-inside: avoid; }
-}
+/* Projects: one per row, all rows the same height */
+.columns { display: grid; grid-auto-rows: 1fr; }
+.columns li > p:last-child { text-align: left; hyphens: manual; }
 
 .notice { margin-top: 1.5rem; font-style: italic; text-align: center; color: var(--faded); }
 
