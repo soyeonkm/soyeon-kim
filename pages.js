@@ -88,6 +88,52 @@
     if (target) setTimeout(() => glide(target), 150);
   });
 
+  // Creative work: repeat the photos once so the drifting strip below loops without a seam
+  const track = document.querySelector(".clip-track");
+  if (track) for (const clip of [...track.children]) {
+    const copy = clip.cloneNode(true);
+    copy.setAttribute("aria-hidden", "true"); // screen readers hear each photo once
+    track.append(copy);
+  }
+  // The strip drifts on its own and can also be scrolled (trackpad, shift + wheel, touch) or dragged with the
+  // mouse. Either way it wraps round by one set of photos, so it never runs out. Hovering eases it down to a
+  // quarter speed and leaving eases it back; readers who ask for less motion get no drifting at all.
+  const strip = track?.parentElement;
+  if (strip) {
+    const set = () => track.scrollWidth / 2; // one set of photos
+    const speed = calm ? 0 : () => set() / 70; // px per second: once round every 70 seconds
+    let pos = 0, written = 0, rate = 1, goal = 1, last = performance.now();
+    const wrap = () => { const w = set(); if (w) { pos %= w; if (pos < 0) pos += w; } };
+    requestAnimationFrame(function tick(now) {
+      const dt = Math.min(now - last, 100) / 1000; last = now;
+      if (Math.abs(strip.scrollLeft - written) > 1) pos = strip.scrollLeft; // the reader scrolled it
+      rate += (goal - rate) * 0.08;
+      if (speed && !strip.classList.contains("dragging")) pos += speed() * rate * dt;
+      wrap();
+      strip.scrollLeft = pos; written = strip.scrollLeft;
+      requestAnimationFrame(tick);
+    });
+    strip.addEventListener("mouseenter", () => goal = 0.25);
+    strip.addEventListener("mouseleave", () => goal = 1);
+    // Mouse drag: move the strip with the pointer; a real drag doesn't count as a click on a photo
+    let startX, startPos, moved = 0;
+    strip.addEventListener("pointerdown", e => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      startX = e.clientX; startPos = pos; moved = 0;
+      strip.classList.add("dragging");
+      strip.setPointerCapture(e.pointerId);
+    });
+    strip.addEventListener("pointermove", e => {
+      if (!strip.classList.contains("dragging")) return;
+      moved = Math.max(moved, Math.abs(e.clientX - startX));
+      pos = startPos - (e.clientX - startX);
+    });
+    const drop = () => strip.classList.remove("dragging");
+    strip.addEventListener("pointerup", drop);
+    strip.addEventListener("pointercancel", drop);
+    strip.addEventListener("click", e => { if (moved > 5) { e.stopPropagation(); e.preventDefault(); } }, true);
+  }
+
   // Experience media: every entry has a photo; some also have a video, which covers the
   // photo and plays only while hovered. A click opens the video (or the photo) larger.
   const viewer = document.querySelector(".viewer");

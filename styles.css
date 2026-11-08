@@ -210,6 +210,21 @@ p, h1, h2, h3, figure { margin: 0; }
   margin-top: clamp(1rem, 3svh, 2rem);
 }
 
+/* A highlighter pass over the key phrases: faded yellow ink, heavier where the pen landed and lighter as it
+   ran on, with uneven rounded ends, laid into the paper rather than over it */
+.deck mark {
+  color: inherit;
+  margin: 0 -0.2em;
+  padding: 0.02em 0.2em 0.06em;
+  border-radius: 0.6em 0.25em 0.7em 0.3em;
+  background:
+    linear-gradient(100deg, rgba(232, 196, 64, 0) 0%, rgba(232, 196, 64, 0.55) 2%, rgba(232, 196, 64, 0.38) 45%, rgba(232, 196, 64, 0.5) 92%, rgba(232, 196, 64, 0.12) 99%),
+    linear-gradient(transparent 12%, rgba(214, 170, 40, 0.18) 70%, transparent 96%);
+  mix-blend-mode: multiply;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone; /* a phrase that wraps gets a fresh stroke on each line */
+}
+
 .facts {
   list-style: none;
   margin: clamp(1.5rem, 4svh, 2.5rem) 0 0;
@@ -318,17 +333,19 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
 .entries.columns li { padding: 1rem 0; }
 .columns li > p:last-child { text-align: left; hyphens: manual; }
 
-/* Creative work: rows of photos like a newspaper's picture page, as wide as the page */
-.clips { margin-top: 1rem; }
-.clip-row { display: flex; gap: 2.5rem; }
-.clip-row + .clip-row { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px dotted var(--rule); }
-/* Every photo in a row is exactly the same height and none is cropped: each takes a share of the row in proportion to
-   its shape (--r), on top of the 8px its frame (border and padding) always needs */
-.clip { position: relative; margin: 0; flex: var(--r) 1 8px; min-width: 0; }
+/* Creative work: one long row of photos that drifts sideways forever, like film through a projector, and that
+   readers can also scroll or drag themselves. pages.js repeats the photos once and does the drifting, wrapping
+   round by exactly one set so the loop has no seam; hovering slows it */
+.clips { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; margin-top: 1rem; cursor: grab; }
+.clips::-webkit-scrollbar { display: none; }
+.clips.dragging { cursor: grabbing; user-select: none; }
+.clip-track { display: flex; width: max-content; }
+.clip { position: relative; margin: 0 2.5rem 0 0; flex: none; }
+.clip::before { content: ""; position: absolute; top: 0; bottom: 0; right: -1.25rem; border-right: 1px solid var(--rule); } /* column rule */
 .clip .media { margin: 0; aspect-ratio: auto; }
-.clip .media img { width: 100%; height: auto; aspect-ratio: var(--r); object-fit: contain; filter: none; mix-blend-mode: normal; } /* full colour: these are the work itself */
-.clip + .clip::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1.25rem; border-left: 1px solid var(--rule); } /* column rule */
-.credit { margin-top: 0.3rem; text-align: right; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faded); }
+.clip img { -webkit-user-drag: none; } /* dragging moves the strip, not the picture */
+.clip .media img { height: min(52svh, 30rem); width: auto; aspect-ratio: var(--r); display: block; object-fit: contain; filter: none; mix-blend-mode: normal; } /* full colour: these are the work itself */
+.clip .caption { width: 0; min-width: 100%; } /* wraps to the photo's width rather than widening it */
 .caption { margin-top: 0.4rem; font-size: 0.9rem; line-height: 1.35; color: var(--faded); } /* a newspaper cutline under each photo */
 .more { margin-top: 1.25rem; text-align: center; font-style: italic; }
 .more a { text-underline-offset: 0.2em; }
@@ -375,8 +392,7 @@ footer {
   .facts { font-size: clamp(0.9375rem, 2.4svh, 1.0625rem); margin-top: 2svh; }
   .facts li { padding: 0.4em 0; grid-template-columns: 1fr; gap: 0.15rem; }
   .trio { grid-template-columns: 1fr; }
-  .clip-row { flex-direction: column; gap: 1rem; }
-  .clip::before { display: none; }
+  .clip .media img { height: 36svh; }
   .entries.trio h3 { font-size: 1.4rem; white-space: normal; } /* one column: the full width is plenty */
   .trio li + li::before { display: none; }
   .trio li + li { border-top: 1px dotted var(--rule); }
