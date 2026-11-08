@@ -57,4 +57,25 @@
   });
   fitPages();
   document.fonts.ready.then(fitPages); // text sizes change once the fonts arrive
+
+  // Experience media: every entry has a photo; some also have a video, which covers the
+  // photo and plays only while hovered. A click opens the video (or the photo) larger.
+  const viewer = document.querySelector(".viewer");
+  for (const media of document.querySelectorAll(".media")) {
+    const video = media.querySelector("video");
+    if (video) {
+      media.addEventListener("mouseenter", () => { media.classList.add("playing"); video.play().catch(() => {}); });
+      media.addEventListener("mouseleave", () => { media.classList.remove("playing"); video.pause(); });
+    }
+    media.addEventListener("click", () => {
+      const shown = video || media.querySelector("img");
+      if (!shown) return; // still a placeholder
+      const big = shown.cloneNode();
+      if (big.tagName === "VIDEO") Object.assign(big, { controls: true, autoplay: true, muted: false });
+      viewer.replaceChildren(big);
+      viewer.showModal();
+    });
+  }
+  viewer.addEventListener("click", e => { if (e.target === viewer) viewer.close(); }); // click outside to close; the video's own controls still work
+  viewer.addEventListener("close", () => viewer.replaceChildren()); // stops a playing video
 })();

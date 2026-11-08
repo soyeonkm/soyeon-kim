@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=61">
+  <link rel="stylesheet" href="styles.css?v=75">
 </head>
 <body>
   <svg style="display: none">
@@ -72,20 +72,23 @@
     <article class="sheet page" id="experience">
       <div class="page-body"><div class="fit">
         <h2 class="section-head">Experience</h2>
-        <ul class="entries">
+        <ul class="entries trio">
           <li>
-            <div class="entry-top"><h3>AceCam Golf</h3><span class="when">Sep 2026 &ndash; Now</span></div>
-            <p class="role">Software Engineering Intern</p>
+            <h3><a href="https://www.acecamgolf.com" target="_blank" rel="noopener">AceCam Golf</a></h3>
+            <div class="entry-top"><p class="role">Software Engineering Intern</p><span class="when">Sep 2026 &ndash; Now</span></div>
+            <figure class="media"><img src="images/acecam.jpg" alt="AceCam Tracer drawing a golf shot&rsquo;s path over tee-box video" loading="lazy"><video src="images/acecam.mp4?v=2" muted loop playsinline preload="none"></video></figure>
             <p>Built AceCam Tracer, a desktop app that cut golf-shot tracing from 18 minutes to 5.</p>
           </li>
           <li>
-            <div class="entry-top"><h3>Carboncopies Foundation</h3><span class="when">Jun &ndash; Oct 2025</span></div>
-            <p class="role">Software Engineering Intern</p>
+            <h3><a href="https://carboncopies.org" target="_blank" rel="noopener">Carboncopies Foundation</a></h3>
+            <div class="entry-top"><p class="role">Software Engineering Intern</p><span class="when">Jun &ndash; Oct 2025</span></div>
+            <figure class="media"><img src="images/carboncopies.jpg" alt="A 3D reconstruction of tangled, color-coded neurons" loading="lazy"></figure>
             <p>Built neural-circuit components the whole team used for brain emulation experiments.</p>
           </li>
           <li>
-            <div class="entry-top"><h3>Michigan Information Interaction Lab</h3><span class="when">2024 &ndash; 2025</span></div>
-            <p class="role">Research Intern</p>
+            <h3><a href="https://mi2lab.com" target="_blank" rel="noopener">Michigan Information Interaction Lab</a></h3>
+            <div class="entry-top"><p class="role">Research Intern</p><span class="when">2024 &ndash; 2025</span></div>
+            <figure class="media"><img class="whole" src="images/miil.jpg" alt="Research poster: Optimizing Collaborative GenAI Agent Interactions in Mixed Reality" loading="lazy"></figure>
             <p>Built a mixed-reality AI system in Unity. Won a Blue Ribbon Award at the UROP Symposium.</p>
           </li>
         </ul>
@@ -139,7 +142,8 @@
     const today = new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
     document.querySelectorAll("[data-today]").forEach(el => el.textContent = today);
   </script>
-  <script src="pages.js?v=14"></script>
+  <dialog class="viewer"></dialog>
+  <script src="pages.js?v=17"></script>
   <script src="weather.js?v=15"></script>
   <script src="spotify.js?v=4"></script>
 </body>
