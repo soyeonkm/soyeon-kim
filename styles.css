@@ -14,6 +14,7 @@
   --nameplate: "Chomsky", "Old English Text MT", serif;
   --bar: 3.5rem;
   --edge: 2.25rem; /* how far the worn edge comes in; everything sits inside it */
+  --gap: clamp(3rem, 9svh, 6rem); /* room between a page's rules and its content */
   --stick: 0.6rem; /* the sliver of paper above the nav once it's frozen at the top while scrolling */
   --pad: clamp(1rem, 4vw, 3rem);
 }
@@ -148,11 +149,16 @@ p, h1, h2, h3, figure { margin: 0; }
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: clamp(0.75rem, 3svh, 2rem) var(--pad) clamp(1.5rem, 6svh, 4rem); /* extra room above the rule to the next page */
+  padding: var(--gap) var(--pad); /* the same room below the rule above and above the rule below */
   container-type: inline-size; /* sizes below use cqi: the page's width, not the window's */
 }
 
 /* The rule between pages is inset like the nav's rules, so they line up */
+/* Inner pages are as tall as their content, with the same gap (--gap) above the first line and below the last, so
+   every section looks equally spaced between its rules */
+.sheet.page { height: auto; }
+.sheet.page .page-body { flex: none; overflow: visible; }
+
 .sheet + .sheet { position: relative; }
 .sheet + .sheet::before { content: ""; position: absolute; top: 0; left: var(--pad); right: var(--pad); border-top: 3px double var(--rule); }
 
@@ -168,7 +174,7 @@ p, h1, h2, h3, figure { margin: 0; }
 
 .front { height: calc(100svh - var(--head, 0px) - var(--bar) - 2 * var(--edge)); } /* first screen: nameplate + nav + this page, exactly */
 
-.front-body { display: flex; align-items: safe center; } /* pages.js scales the story down if it would not fit */
+.page-body.front-body { display: flex; flex-direction: row; align-items: safe center; } /* pages.js scales the story down if it would not fit */
 
 .front-story {
   flex: 1;
@@ -176,7 +182,6 @@ p, h1, h2, h3, figure { margin: 0; }
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(1.5rem, 3cqi, 3rem);
-  padding-top: clamp(1rem, 3svh, 2rem);
 }
 
 .front-story > div { --h1: clamp(2.75rem, 8.88cqi, 6.4rem); }
@@ -240,20 +245,21 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
 
 /* Inside pages */
 
-.page-body { flex: 1; min-height: 0; width: 100%; max-width: 78rem; margin: 0 auto; overflow: hidden; } /* same width as the front page */
-.fit { padding-bottom: 1rem; }
+.page-body { flex: 1; min-height: 0; width: 100%; max-width: 78rem; margin: 0 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: safe center; } /* same width as the front page; content centred top to bottom so the gaps above and below match */
 
 .section-head {
   font: 900 clamp(2.5rem, min(7cqi, 10svh), 4.5rem)/1.05 var(--display);
   text-align: center;
-  margin: 0.75rem 0;
+  margin: 0 0 0.75rem;
   padding-bottom: 0.3em;
   border-bottom: 3px double var(--ink);
 }
 
 .entries { list-style: none; margin: 0; padding: 0; }
 .entries li { padding: 1rem 0; border-bottom: 1px dotted var(--rule); }
-.entries li:last-child { border-bottom: 0; }
+.entries li:last-child { border-bottom: 0; padding-bottom: 0; }
+.entries li:first-child { padding-top: 0; }
+.trio li { padding-top: 0; padding-bottom: 0; }
 .entries li > p:last-child { text-align: justify; hyphens: auto; }
 
 .entry-top {
@@ -300,13 +306,11 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
 .entries li > p:last-child { margin-top: 0.35rem; }
 
 /* Projects: one per row, all rows the same height */
-.columns { display: grid; grid-auto-rows: 1fr; }
+.columns { display: grid; grid-auto-rows: 1fr; margin: -1rem 0; } /* rows all the same height, so every item keeps its padding; the list's negative margin takes it back at the ends */
+.entries.columns li { padding: 1rem 0; }
 .columns li > p:last-child { text-align: left; hyphens: manual; }
 
-/* Creative work: rows of photos like a newspaper's picture page, as wide as the page. This page is taller than the
-   screen and simply scrolls */
-.sheet.grows { height: auto; min-height: calc(100svh - var(--stick) - var(--bar) - var(--edge)); }
-.sheet.grows .page-body { overflow: visible; }
+/* Creative work: rows of photos like a newspaper's picture page, as wide as the page */
 .clips { margin-top: 1rem; }
 .clip-row { display: flex; gap: 2.5rem; }
 .clip-row + .clip-row { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px dotted var(--rule); }
@@ -338,7 +342,7 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
 .elsewhere a { text-underline-offset: 0.25em; }
 
 footer {
-  margin-top: 1rem;
+  margin-top: var(--gap); /* the same gap the page keeps above its first line */
   border-top: 3px double var(--ink);
   padding-top: 0.75rem;
   text-align: center;
@@ -353,8 +357,6 @@ footer {
   .tagline { font-size: 1rem; }
   .front-story { grid-template-columns: 1fr; align-content: safe center; gap: 2.5svh; }
   .front { height: auto; min-height: calc(100svh - var(--head, 0px) - var(--bar) - 2 * var(--edge)); } /* phones: the front page grows rather than cutting off its text */
-  .sheet.page { height: auto; min-height: calc(100svh - var(--stick) - var(--bar) - var(--edge)); } /* and so do the other pages, instead of shrinking to unreadable */
-  .page-body { overflow: visible; }
   .headshot { order: -1; width: 22svh; justify-self: center; }
   figcaption { display: none; }
   .front h1 { font-size: clamp(2.25rem, min(13cqi, 8svh), 4rem); white-space: normal; }

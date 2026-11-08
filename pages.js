@@ -1,6 +1,6 @@
-// Every page is one screen tall. fitPages() scales the pages' contents (CSS zoom, so
-// text reflows rather than shrinking like an image) just enough that the fullest page
-// fits, and uses that same scale on every page so they all match.
+// The front page is exactly one screen tall. fitPages() scales its contents (CSS zoom, so
+// text reflows rather than shrinking like an image) just enough to fit. The other pages
+// are as tall as their content.
 (() => {
   const setZoom = (body, z) => { body.firstElementChild.style.zoom = z; };
 
@@ -23,11 +23,8 @@
     // The sticky nav's height sets how tall a page can be; the front page also loses the nameplate above it
     document.documentElement.style.setProperty("--bar", document.querySelector(".menu").offsetHeight + "px");
     document.documentElement.style.setProperty("--head", document.querySelector(".bar").offsetHeight + "px");
-    // The front page and the photo page have their own layouts, so their own scales; the text pages share one
+    // Only the front page is held to one screen; the other pages are as tall as their content
     for (const own of document.querySelectorAll(".page-body.own-scale")) setZoom(own, bestZoom(own));
-    const bodies = [...document.querySelectorAll(".sheet:not(.grows) .page-body:not(.own-scale)")]; // the photo page just grows
-    const zoom = Math.min(...bodies.map(bestZoom));
-    for (const body of bodies) setZoom(body, zoom);
   }
 
   // The nav carries a paper cap only once it's stuck, so at rest nothing covers the tagline above it
