@@ -180,25 +180,22 @@ p, h1, h2, h3, figure { margin: 0; }
   margin: 0 auto;
 }
 
+.front-story > div { --h1: clamp(2.75rem, 8.88cqi, 6.4rem); }
+
 .front h1 {
-  font: 900 clamp(2.75rem, min(7.5cqi, 11svh), 6.5rem)/1 var(--display);
+  font: 900 var(--h1)/1 var(--display); /* one line, the width of the column */
+  white-space: nowrap;
   letter-spacing: -0.02em;
 }
 
-.deck {
-  font-size: clamp(1.2rem, min(2cqi, 3.4svh), 1.75rem);
-  line-height: 1.45;
-  max-width: 24em;
-  margin-top: clamp(1rem, 3svh, 2rem);
-  text-align: justify;
-  hyphens: auto;
-}
+/* The text column is a container, so the name and paragraph size themselves to its width */
+.front-story > div { container-type: inline-size; }
 
-/* Drop cap */
-.deck::first-letter {
-  font: 700 3.1em/0.8 var(--display);
-  float: left;
-  padding: 0.08em 0.1em 0 0;
+.deck {
+  font-size: clamp(1.1rem, min(2.7cqi, 3svh), 1.5rem);
+  max-width: calc(var(--h1) * 8.75 - 1cm); /* "Hi, I'm Soyeon Kim" is about 8.75em wide: stop about 1cm before its m */
+  line-height: 1.45;
+  margin-top: clamp(1rem, 3svh, 2rem);
 }
 
 .facts {
@@ -206,7 +203,7 @@ p, h1, h2, h3, figure { margin: 0; }
   margin: clamp(1.5rem, 4svh, 2.5rem) 0 0;
   padding: 0;
   max-width: 34rem;
-  font-size: clamp(1rem, min(1.5cqi, 2.5svh), 1.25rem);
+  font-size: clamp(1rem, min(2.25cqi, 2.5svh), 1.25rem);
 }
 
 .facts li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); align-items: baseline; border-top: 1px dotted var(--rule); padding: 0.7em 0; }
@@ -315,10 +312,11 @@ footer {
   .tagline { font-size: 1rem; }
   .kicker span:nth-child(3) { display: none; }
   .front-story { grid-template-columns: 1fr; align-content: safe center; gap: 2.5svh; }
+  .front { height: auto; min-height: calc(100svh - var(--head, 0px) - var(--bar) - 2 * var(--edge)); } /* phones: the front page grows rather than cutting off its text */
   .headshot { order: -1; width: 22svh; justify-self: center; }
   figcaption { display: none; }
-  .front h1 { font-size: clamp(2.25rem, min(13cqi, 8svh), 4rem); }
-  .deck { font-size: clamp(1.0625rem, min(4.6cqi, 3svh), 1.25rem); margin-top: 2svh; text-align: left; }
+  .front h1 { font-size: clamp(2.25rem, min(13cqi, 8svh), 4rem); white-space: normal; }
+  .deck { font-size: clamp(1rem, min(4.4cqi, 2.8svh), 1.2rem); margin-top: 2svh; }
   .facts { font-size: clamp(0.9375rem, 2.4svh, 1.0625rem); margin-top: 2svh; }
   .facts li { padding: 0.4em 0; grid-template-columns: 1fr; gap: 0.15rem; }
 }
@@ -336,6 +334,6 @@ footer {
   .front-story { grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding-top: 0; }
   .headshot { order: 0; width: 40svh; }
   .front h1 { font-size: 13svh; }
-  .deck { font-size: 5svh; }
+  .deck { display: none; }
   .facts { display: none; }
 }
