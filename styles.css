@@ -314,9 +314,10 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
    its shape (--r), on top of the 8px its frame (border and padding) always needs */
 .clip { position: relative; margin: 0; flex: var(--r) 1 8px; min-width: 0; }
 .clip .media { margin: 0; aspect-ratio: auto; }
-.clip .media img { width: 100%; height: auto; aspect-ratio: var(--r); object-fit: contain; }
+.clip .media img { width: 100%; height: auto; aspect-ratio: var(--r); object-fit: contain; filter: none; mix-blend-mode: normal; } /* full colour: these are the work itself */
 .clip + .clip::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1.25rem; border-left: 1px solid var(--rule); } /* column rule */
 .credit { margin-top: 0.3rem; text-align: right; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faded); }
+.caption { margin-top: 0.4rem; font-size: 0.9rem; line-height: 1.35; color: var(--faded); } /* a newspaper cutline under each photo */
 .more { margin-top: 1.25rem; text-align: center; font-style: italic; }
 .more a { text-underline-offset: 0.2em; }
 
