@@ -138,7 +138,7 @@ p, h1, h2, h3, figure { margin: 0; }
   border-bottom: 3px double var(--ink);
   font-size: 0.8125rem;
 }
-.menu a { text-decoration: none; }
+.menu a { text-decoration: none; white-space: nowrap; } /* "Creative Work" never splits over two lines */
 .menu a:hover { text-decoration: underline; }
 /* While stuck (pages.js sets the class), paper above the nav so nothing scrolls past in the sliver between it and the top */
 .menu.stuck::before { content: ""; position: absolute; left: 0; right: 0; bottom: calc(100% + 1px); height: var(--stick); background: inherit; }
@@ -338,7 +338,8 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
   overflow-wrap: anywhere;
 }
 
-.elsewhere { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; }
+.elsewhere { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem 2rem; margin-top: 1.5rem; }
+.elsewhere a { white-space: nowrap; }
 .elsewhere a { text-underline-offset: 0.25em; }
 
 footer {
@@ -353,7 +354,9 @@ footer {
 
 @media (max-width: 720px) {
   :root { --bar: 3rem; }
-  .menu { gap: 1rem; }
+  .menu { gap: 0.4rem 1rem; flex-wrap: wrap; font-size: 0.6875rem; letter-spacing: 0.1em; } /* four links fit a phone; if not, they wrap to a second centred row */
+  .elsewhere { gap: 0.6rem 1.25rem; }
+  .trio li + li { margin-top: 1.5rem; padding-top: 1.5rem; } /* stacked jobs get the same breathing room as rows elsewhere */
   .tagline { font-size: 1rem; }
   .front-story { grid-template-columns: 1fr; align-content: safe center; gap: 2.5svh; }
   .front { height: auto; min-height: calc(100svh - var(--head, 0px) - var(--bar) - 2 * var(--edge)); } /* phones: the front page grows rather than cutting off its text */
