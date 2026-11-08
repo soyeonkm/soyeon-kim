@@ -52,8 +52,41 @@
     clearTimeout(fitTimer);
     fitTimer = setTimeout(fitPages, 100);
   });
+  // Scrolling with some weight: Lenis eases the wheel and trackpad so the page drifts to a stop instead
+  // of snapping (touch screens keep their own native scrolling). Skipped for readers who ask for less motion.
+  const calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const lenis = !calm && window.Lenis ? new Lenis({ lerp: 0.12, wheelMultiplier: 0.9 }) : null;
+  if (lenis) requestAnimationFrame(function raf(t) { lenis.raf(t); requestAnimationFrame(raf); });
+  // Glide to a spot (a y position or an element), leaving room for the frozen nav above a section
+  const navRoom = () => menu.offsetHeight + stick * 16;
+  function glide(to) {
+    if (lenis) return lenis.scrollTo(to, { offset: typeof to === "number" ? 0 : -navRoom() });
+    typeof to === "number" ? scrollTo({ top: to, behavior: calm ? "auto" : "smooth" }) : to.scrollIntoView({ behavior: calm ? "auto" : "smooth" });
+  }
+  for (const a of document.querySelectorAll('.menu a[href^="#"]')) a.addEventListener("click", e => {
+    const el = document.querySelector(a.hash);
+    if (!el || !lenis) return; // without Lenis the browser's own smooth anchor scroll does it
+    e.preventDefault();
+    history.replaceState(null, "", a.hash);
+    glide(el);
+  });
+
+  // The nameplate glides back to the top of the page (and clears any #section from the address) rather than reloading
+  document.querySelector(".nameplate").addEventListener("click", e => {
+    e.preventDefault();
+    history.replaceState(null, "", location.pathname);
+    glide(0);
+  });
+
+  // Opened (or reloaded) at a section's link: start at the top and glide down once the layout has
+  // settled, rather than jumping there, or landing in the wrong place as fonts and photos arrive
+  const target = location.hash && document.querySelector(location.hash);
+  if (target) { history.scrollRestoration = "manual"; scrollTo(0, 0); }
   fitPages();
-  document.fonts.ready.then(fitPages); // text sizes change once the fonts arrive
+  document.fonts.ready.then(() => {
+    fitPages(); // text sizes change once the fonts arrive
+    if (target) setTimeout(() => glide(target), 150);
+  });
 
   // Experience media: every entry has a photo; some also have a video, which covers the
   // photo and plays only while hovered. A click opens the video (or the photo) larger.
@@ -71,8 +104,9 @@
       if (big.tagName === "VIDEO") Object.assign(big, { controls: true, autoplay: true, muted: false });
       viewer.replaceChildren(big);
       viewer.showModal();
+      lenis?.stop(); // the page stays put behind the enlarged photo
     });
   }
   viewer.addEventListener("click", e => { if (e.target === viewer) viewer.close(); }); // click outside to close; the video's own controls still work
-  viewer.addEventListener("close", () => viewer.replaceChildren()); // stops a playing video
+  viewer.addEventListener("close", () => { viewer.replaceChildren(); lenis?.start(); }); // stops a playing video
 })();

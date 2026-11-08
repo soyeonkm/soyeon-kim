@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=102">
+  <link rel="stylesheet" href="styles.css?v=106">
 </head>
 <body>
   <svg style="display: none">
@@ -44,7 +44,7 @@
       <p class="label">Now Playing on Spotify</p>
       <a class="track" target="_blank" rel="noopener"><span class="cover"><img class="art" alt=""></span><span class="text"><strong class="title">&nbsp;</strong><span class="artist">&nbsp;</span></span></a>
     </aside>
-    <a href="#front" class="nameplate">Soyeon Kim</a>
+    <a href="/" class="nameplate">Soyeon Kim</a>
     <p class="tagline">Ann Arbor, Michigan &middot; <span data-today>Monday, November 2, 2026</span></p>
   </header>
   <!-- Outside the header so it can stick to the page while the nameplate scrolls away -->
@@ -183,7 +183,8 @@
     document.querySelectorAll("[data-today]").forEach(el => el.textContent = today);
   </script>
   <dialog class="viewer"></dialog>
-  <script src="pages.js?v=22"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="pages.js?v=26"></script>
   <script src="weather.js?v=16"></script>
   <script src="spotify.js?v=7"></script>
 </body>

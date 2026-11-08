@@ -6,6 +6,10 @@
 
 :root {
   --paper: #ece3cd;
+  --newsprint:
+    radial-gradient(ellipse at center, transparent 55%, rgba(80, 50, 10, 0.18)),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.025) 0 1px, transparent 1px 3px),
+    var(--paper);
   --ink: #1f1a14;
   --faded: #6a5f4e;
   --rule: #a3957c;
@@ -21,7 +25,11 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--bar) + var(--stick)); }
+html { scroll-padding-top: calc(var(--bar) + var(--stick)); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } } /* glide to sections, unless the reader has asked for less motion */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; } /* Lenis (pages.js) does the gliding itself */
+.lenis.lenis-stopped { overflow: hidden; }
 
 body {
   position: relative; /* the worn edge is drawn round the whole page, not the window */
@@ -29,13 +37,12 @@ body {
   padding: var(--edge);
   color: var(--ink);
   font: 400 1.2rem/1.45 var(--serif);
-  /* Aged newsprint: warm paper, darker toward the edges, with a faint grain */
-  background:
-    radial-gradient(ellipse at center, transparent 55%, rgba(80, 50, 10, 0.18)),
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.025) 0 1px, transparent 1px 3px),
-    var(--paper);
-  background-attachment: fixed;
+  background: var(--paper);
 }
+/* Aged newsprint: warm paper, darker toward the edges, with a faint grain. It stays put while the page
+   scrolls over it; drawn once on its own fixed layer (not as a fixed background, which the browser
+   would repaint on every frame of scrolling) */
+body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: var(--newsprint); pointer-events: none; }
 
 a { color: inherit; }
 
@@ -128,7 +135,8 @@ p, h1, h2, h3, figure { margin: 0; }
   position: sticky;
   top: var(--stick);
   z-index: 1;
-  background: inherit; /* the page's own grain and vignette (fixed to the window), so the bar melts into the paper */
+  background: var(--newsprint);
+  background-attachment: fixed; /* every layer pinned to the window like the page behind it, so the bar melts into the paper */
   display: flex;
   justify-content: center;
   gap: clamp(1.5rem, 4vw, 3.5rem);
@@ -248,7 +256,7 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
 .page-body { flex: 1; min-height: 0; width: 100%; max-width: 78rem; margin: 0 auto; overflow: hidden; display: flex; flex-direction: column; justify-content: safe center; } /* same width as the front page; content centred top to bottom so the gaps above and below match */
 
 .section-head {
-  font: 900 clamp(2.5rem, min(7cqi, 10svh), 4.5rem)/1.05 var(--display);
+  font: 900 clamp(2rem, min(5.6cqi, 8svh), 3.6rem)/1.05 var(--display); /* section headings: Experience, Projects, Creative Work */
   text-align: center;
   margin: 0 0 0.75rem;
   padding-bottom: 0.3em;
