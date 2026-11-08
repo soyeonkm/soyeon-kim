@@ -41,7 +41,7 @@ a { color: inherit; }
 p, h1, h2, h3, figure { margin: 0; }
 
 /* Small-caps labels: the newspaper furniture */
-.menu, .kicker, .when, .facts span, footer, .elsewhere, figcaption {
+.menu, .when, .facts span, footer, .elsewhere, figcaption {
   font: 700 0.75rem/1.2 var(--serif);
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -138,22 +138,13 @@ p, h1, h2, h3, figure { margin: 0; }
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: clamp(0.75rem, 3svh, 2rem) var(--pad);
+  padding: clamp(0.75rem, 3svh, 2rem) var(--pad) clamp(1.5rem, 6svh, 4rem); /* extra room above the rule to the next page */
   container-type: inline-size; /* sizes below use cqi: the page's width, not the window's */
 }
 
-.sheet + .sheet { border-top: 3px double var(--rule); }
-
-/* A running head: thin rule, text, thick rule */
-.kicker {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
-  padding: 0.4rem 0;
-  color: var(--faded);
-}
+/* The rule between pages is inset like the nav's rules, so they line up */
+.sheet + .sheet { position: relative; }
+.sheet + .sheet::before { content: ""; position: absolute; top: 0; left: var(--pad); right: var(--pad); border-top: 3px double var(--rule); }
 
 .nameplate {
   display: block;
@@ -167,17 +158,15 @@ p, h1, h2, h3, figure { margin: 0; }
 
 .front { height: calc(100svh - var(--head, 0px) - var(--bar) - 2 * var(--edge)); } /* first screen: nameplate + nav + this page, exactly */
 
+.front-body { display: flex; align-items: safe center; } /* pages.js scales the story down if it would not fit */
+
 .front-story {
   flex: 1;
-  min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(1.5rem, 3cqi, 3rem);
   padding-top: clamp(1rem, 3svh, 2rem);
-  max-width: 78rem;
-  width: 100%;
-  margin: 0 auto;
 }
 
 .front-story > div { --h1: clamp(2.75rem, 8.88cqi, 6.4rem); }
@@ -241,7 +230,7 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
 
 /* Inside pages */
 
-.page-body { flex: 1; min-height: 0; width: 100%; max-width: 64rem; margin: 0 auto; overflow: hidden; }
+.page-body { flex: 1; min-height: 0; width: 100%; max-width: 78rem; margin: 0 auto; overflow: hidden; } /* same width as the front page */
 .fit { padding-bottom: 1rem; }
 
 .section-head {
@@ -310,7 +299,6 @@ footer {
   :root { --bar: 3rem; }
   .menu { gap: 1rem; }
   .tagline { font-size: 1rem; }
-  .kicker span:nth-child(3) { display: none; }
   .front-story { grid-template-columns: 1fr; align-content: safe center; gap: 2.5svh; }
   .front { height: auto; min-height: calc(100svh - var(--head, 0px) - var(--bar) - 2 * var(--edge)); } /* phones: the front page grows rather than cutting off its text */
   .headshot { order: -1; width: 22svh; justify-self: center; }
