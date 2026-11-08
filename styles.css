@@ -264,6 +264,32 @@ figcaption { margin-top: 0.5rem; color: var(--faded); text-align: center; letter
   gap: 0.25rem 1rem;
 }
 
+/* Experience: three side by side, title above the photo or video, description below */
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 2.5rem; }
+.trio li { border-bottom: 0; display: grid; grid-row: span 4; grid-template-rows: subgrid; align-content: start; } /* subgrid: the photos line up even when a title wraps */
+.entries.trio h3 { font-size: min(1.575rem, (min(100cqi, 78rem) - 5rem) / 3 / 17.8); white-space: nowrap; } /* a column's width over the longest title's ("Michigan Information Interaction Lab", about 17.5em): every title fits on one line */
+.trio h3 a { text-decoration: none; }
+.trio h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+.trio h3 { align-self: end; } /* titles that wrap still sit right on the photo */
+.trio .role { margin: 0; }
+.trio .entry-top { margin-top: 0.15rem; }
+.trio li + li { position: relative; }
+.trio li + li::before { content: ""; position: absolute; top: 1rem; bottom: 1rem; left: -1.25rem; border-left: 1px solid var(--rule); } /* hairline between, like a broadsheet */
+.trio li > p:last-child { text-align: left; hyphens: manual; }
+
+/* Each entry's photo, muted like the headshot, with an optional video over it that plays on hover */
+.media { position: relative; aspect-ratio: 1280 / 740; /* the AceCam demo's own shape, so it shows uncropped */ border: 1px solid var(--ink); padding: 3px; margin: 0.25rem 0 0.5rem; cursor: zoom-in; }
+.media img, .media video { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.8) contrast(1.05); mix-blend-mode: multiply; }
+.media video { position: absolute; inset: 3px; width: calc(100% - 6px); height: calc(100% - 6px); object-fit: contain; opacity: 0; transition: opacity 0.2s; } /* never cropped */
+.media img { transition: opacity 0.2s; }
+.media img.whole { object-fit: contain; } /* a poster: show all of it rather than crop it */
+.media.playing video { opacity: 1; } /* the photo shows until hovered */
+.media.playing img { opacity: 0; } /* both blend into the paper, so the photo must go or it shows through */
+.media .soon { display: grid; place-items: center; height: 100%; background: rgba(60, 40, 10, 0.06); color: var(--faded); font-style: italic; cursor: default; }
+.viewer { border: 1px solid var(--ink); padding: 4px; background: var(--paper); max-width: 90vw; max-height: 90vh; }
+.viewer::backdrop { background: rgba(20, 15, 5, 0.7); }
+.viewer img, .viewer video { display: block; max-width: calc(90vw - 10px); max-height: calc(90vh - 10px); }
+
 .entries h3 { font: 700 clamp(1.375rem, 2.8cqi, 1.75rem)/1.15 var(--display); }
 
 .gh { display: inline-flex; vertical-align: 0.05em; margin-left: 0.3em; color: var(--faded); }
@@ -317,6 +343,10 @@ footer {
   .deck { font-size: clamp(1rem, min(4.4cqi, 2.8svh), 1.2rem); margin-top: 2svh; }
   .facts { font-size: clamp(0.9375rem, 2.4svh, 1.0625rem); margin-top: 2svh; }
   .facts li { padding: 0.4em 0; grid-template-columns: 1fr; gap: 0.15rem; }
+  .trio { grid-template-columns: 1fr; }
+  .entries.trio h3 { font-size: 1.4rem; white-space: normal; } /* one column: the full width is plenty */
+  .trio li + li::before { display: none; }
+  .trio li + li { border-top: 1px dotted var(--rule); }
 }
 
 /* Short phones: smaller photo so the headline and facts keep their size */
