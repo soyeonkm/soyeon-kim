@@ -1,7 +1,7 @@
 // The weather ear: today's forecast for wherever the reader is. Their IP gives a rough city at
 // once; the browser's own location (GPS/Wi-Fi, after the permission prompt) then names the
 // town precisely and the box updates. The forecast comes from Open-Meteo. Everything is free
-// and keyless, and if it all fails the box is removed.
+// and keyless. The box stays hidden until a forecast arrives, and is removed if none does.
 (async () => {
   const box = document.querySelector(".weather");
   if (!box) return;

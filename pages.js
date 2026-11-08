@@ -37,7 +37,7 @@
   const textBox = el => { const r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect(); };
   window.fitEars = () => {
     const weather = document.querySelector(".weather"), music = document.querySelector(".spotify");
-    if (weather && music) { music.style.height = weather.offsetHeight + "px"; music.style.width = weather.offsetWidth + "px"; } // the two ears match
+    if (weather && music && !weather.classList.contains("loading")) { music.style.height = weather.offsetHeight + "px"; music.style.width = weather.offsetWidth + "px"; } // the two ears match
     const texts = masthead.map(textBox);
     for (const ear of document.querySelectorAll(".ear")) {
       const b = ear.getBoundingClientRect();
