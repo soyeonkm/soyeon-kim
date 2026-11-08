@@ -88,22 +88,27 @@
     if (target) setTimeout(() => glide(target), 150);
   });
 
-  // Creative work: repeat the photos once so the drifting strip below loops without a seam
+  // Creative work: three copies of the photos, so the strip below always has a full set to either side of
+  // where the reader is and can loop forever in both directions without a seam
   const track = document.querySelector(".clip-track");
-  if (track) for (const clip of [...track.children]) {
-    const copy = clip.cloneNode(true);
-    copy.setAttribute("aria-hidden", "true"); // screen readers hear each photo once
-    track.append(copy);
+  if (track) {
+    const originals = [...track.children];
+    for (let n = 0; n < 2; n++) for (const clip of originals) {
+      const copy = clip.cloneNode(true);
+      copy.setAttribute("aria-hidden", "true"); // screen readers hear each photo once
+      track.append(copy);
+    }
   }
   // The strip drifts on its own and can also be scrolled (trackpad, shift + wheel, touch) or dragged with the
-  // mouse. Either way it wraps round by one set of photos, so it never runs out. Hovering eases it down to a
+  // mouse. It wraps round by one set of photos, so it never runs out at either end. Hovering eases it down to a
   // quarter speed and leaving eases it back; readers who ask for less motion get no drifting at all.
   const strip = track?.parentElement;
   if (strip) {
-    const set = () => track.scrollWidth / 2; // one set of photos
+    const set = () => track.scrollWidth / 3; // one set of photos
     const speed = calm ? 0 : () => set() / 70; // px per second: once round every 70 seconds
-    let pos = 0, written = 0, rate = 1, goal = 1, last = performance.now();
-    const wrap = () => { const w = set(); if (w) { pos %= w; if (pos < 0) pos += w; } };
+    let pos = set(), written = 0, rate = 1, goal = 1, last = performance.now();
+    // Keep the view inside the middle copy: past either end, jump by one set to the identical spot
+    const wrap = () => { const w = set(); if (!w) return; while (pos < w) pos += w; while (pos >= 2 * w) pos -= w; };
     requestAnimationFrame(function tick(now) {
       const dt = Math.min(now - last, 100) / 1000; last = now;
       if (Math.abs(strip.scrollLeft - written) > 1) pos = strip.scrollLeft; // the reader scrolled it
