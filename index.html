@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=78">
+  <link rel="stylesheet" href="styles.css?v=87">
 </head>
 <body>
   <svg style="display: none">
@@ -48,12 +48,13 @@
   <nav class="menu">
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
+    <a href="#creative">Creative Work</a>
     <a href="#contact">Contact</a>
   </nav>
 
   <main class="pages">
     <article class="sheet front" id="front">
-      <div class="page-body front-body">
+      <div class="page-body front-body own-scale">
         <div class="front-story">
           <div>
             <h1>Hi, I&rsquo;m Soyeon Kim.</h1>
@@ -119,6 +120,51 @@
       </div></div>
     </article>
 
+    <article class="sheet page grows" id="creative">
+      <div class="page-body"><div class="fit">
+        <h2 class="section-head">Creative Work</h2>
+        <div class="clips">
+          <div class="clip-row">
+            <figure class="clip" style="--r: calc(2000 / 1332)">
+              <div class="media"><img src="images/creative-9.jpg?v=2" alt="A Michigan running back points to the crowd after a touchdown" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+            <figure class="clip" style="--r: calc(2000 / 1333)">
+              <div class="media"><img src="images/creative-11.jpg" alt="Ballet dancers in a line against a yellow backdrop" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+            <figure class="clip" style="--r: calc(2000 / 1334)">
+              <div class="media"><img src="images/creative-8.jpg" alt="Michigan students cheer from the stands under a blue sky" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+            <figure class="clip" style="--r: calc(2250 / 1498)">
+              <div class="media"><img src="images/creative-5.jpg" alt="Two graduates laugh over The Michigan Daily&rsquo;s Graduation Edition by a window" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+          </div>
+          <div class="clip-row">
+            <figure class="clip" style="--r: calc(2250 / 1498)">
+              <div class="media"><img src="images/creative-3.jpg" alt="Dancers mid-move on a purple-lit stage" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+            <figure class="clip" style="--r: calc(2400 / 1597)">
+              <div class="media"><img src="images/creative-2.jpg" alt="A Michigan receiver runs the sideline in front of a gold crowd" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+            <figure class="clip" style="--r: calc(2000 / 1333)">
+              <div class="media"><img src="images/creative-12.jpg" alt="Graduates spray champagne on the steps of a columned building" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+            <figure class="clip" style="--r: calc(2256 / 1496)">
+              <div class="media"><img src="images/creative-4.jpg" alt="A Michigan forward holds the ball against Maryland" loading="lazy"></div>
+              <p class="credit">Soyeon Kim</p>
+            </figure>
+          </div>
+        </div>
+        <p class="more"><a href="https://soyeonkimphotography.myportfolio.com/" target="_blank" rel="noopener">See the full photography portfolio</a></p>
+      </div></div>
+    </article>
+
     <article class="sheet page" id="contact">
       <div class="page-body"><div class="fit">
         <h2 class="section-head">Correspondence</h2>
@@ -135,7 +181,7 @@
     document.querySelectorAll("[data-today]").forEach(el => el.textContent = today);
   </script>
   <dialog class="viewer"></dialog>
-  <script src="pages.js?v=17"></script>
+  <script src="pages.js?v=19"></script>
   <script src="weather.js?v=15"></script>
   <script src="spotify.js?v=4"></script>
 </body>

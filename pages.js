@@ -23,9 +23,9 @@
     // The sticky nav's height sets how tall a page can be; the front page also loses the nameplate above it
     document.documentElement.style.setProperty("--bar", document.querySelector(".menu").offsetHeight + "px");
     document.documentElement.style.setProperty("--head", document.querySelector(".bar").offsetHeight + "px");
-    const front = document.querySelector(".front-body");
-    setZoom(front, bestZoom(front)); // the front page has its own layout, so its own scale
-    const bodies = [...document.querySelectorAll(".page-body:not(.front-body)")];
+    // The front page and the photo page have their own layouts, so their own scales; the text pages share one
+    for (const own of document.querySelectorAll(".page-body.own-scale")) setZoom(own, bestZoom(own));
+    const bodies = [...document.querySelectorAll(".sheet:not(.grows) .page-body:not(.own-scale)")]; // the photo page just grows
     const zoom = Math.min(...bodies.map(bestZoom));
     for (const body of bodies) setZoom(body, zoom);
   }
